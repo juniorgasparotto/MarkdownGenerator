@@ -1,6 +1,6 @@
 ﻿# Table of contents
 
-____TABLE_OF_CONTENTS____
+<table-of-contents/>
 
 see: {{<anchor-get name="licence" />}}
 

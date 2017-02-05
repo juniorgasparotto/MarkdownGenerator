@@ -24,7 +24,7 @@ namespace MarkdownMerge.Commands
 
         public override string ToString()
         {
-            return this.result;
+            return this.result ?? RealString;
         }
     }
 }

@@ -8,6 +8,7 @@ namespace MarkdownMerge.Commands
         private List<StringPart> parts;
 
         public string RealString { get; private set; }
+        public string NewString { get; set; }
 
         public StringPart Before
         {
@@ -33,23 +34,23 @@ namespace MarkdownMerge.Commands
             this.RealString = realString;
         }
 
-        public string GetBeforeString()
+        public RealStringPart GetBeforeString()
         {
             var before = Before;
             if (before != null && before is RealStringPart)
             {
-                return before.ToString();
+                return (RealStringPart)before;
             }
 
             return null;
         }
 
-        public string GetNextString()
+        public RealStringPart GetNextString()
         {
             var next = Next;
             if (next != null && next is RealStringPart)
             {
-                return next.ToString();
+                return (RealStringPart)next;
             }
 
             return null;
@@ -59,7 +60,7 @@ namespace MarkdownMerge.Commands
 
         public override string ToString()
         {
-            return this.RealString;
+            return NewString ?? RealString;
         }
     }
 }

@@ -1,7 +1,7 @@
-﻿# TitleA {{<header-set anchor-name="a" />}} continue
-## TitleB {{<header-set anchor-name="titleb" />}} continue
-### TitleC {{<header-set anchor-name="titlec" />}} continue
-# TitleD {{<header-set anchor-name="b" />}}
+﻿# TitleA <header-set anchor-name="a" /> continue
+## TitleB <header-set anchor-name="titleb" /> continue
+### TitleC <header-set anchor-name="titlec" /> continue
+# TitleD <header-set anchor-name="b" />
 
 Test Test Test Test Test Test Test
 
