@@ -1,0 +1,14 @@
+﻿# Table of contents
+
+____TABLE_OF_CONTENTS____
+
+see: {{<anchor-get name="licence" />}}
+
+# Documentation
+
+
+#include "Sample\Doc1.md"
+#include "Sample\Doc2.md"
+#include "Sample\Index2.md" @ignore
+
+Licence: {{<anchor-set name="licence" text="My licence" />}}
