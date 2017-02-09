@@ -144,21 +144,25 @@ namespace MarkdownMerge.Commands
 
                 if (matchHeader.Groups.Count == 3)
                 {
+                    var level  = matchHeader.Groups[1].Value.Trim();
+                    var title = matchHeader.Groups[2].Value.Trim();
                     var anchorName = part.Node.Attributes["anchor-name"];
+
                     Anchor anchor = null;
                     if (anchorName != null)
                     {
                         anchor = new Anchor()
                         {
-                            Name = anchorName.Value
+                            Name = anchorName.Value,
+                            Text = title
                         };
                         anchors.Add(anchor);
                     }
 
                     var header = new Header();
                     header.Anchor = anchor;
-                    header.Level = matchHeader.Groups[1].Value.Trim();
-                    header.Name = matchHeader.Groups[2].Value.Trim();
+                    header.Level = level;
+                    header.Title = title;
                     headers.Add(header);
 
                     var anchorHtml = "";
@@ -166,7 +170,7 @@ namespace MarkdownMerge.Commands
                         anchorHtml = GetAnchor(anchor.Name, null);
 
                     before.NewString = leftContent.Remove(leftContent.Length - leftLineUntilStart.Length);
-                    return header.Level + " " + anchorHtml + header.Name;
+                    return header.Level + " " + anchorHtml + header.Title;
                 }
             }
 
@@ -199,9 +203,20 @@ namespace MarkdownMerge.Commands
                 var anchor = anchors.FirstOrDefault(f => f.Name == anchorNameAttr.Value);
                 if (anchor != null)
                     return GetLinkFromAnchor(anchor.Text, anchor.Name);
+
+                var lastLines = "";
+                var i = 0;
+                var before = (StringPart)part;
+                while (before != null && i < 10)
+                {
+                    i++;
+                    lastLines = before.RealString + lastLines;
+                    before = before.Before;
+                }
+                throw new Exception($"The anchor '{anchorNameAttr.Value}' doesn't exists at line: {lastLines}");
             }
 
-            return "";
+            throw new Exception($"The tag <anchor-get> needs the attribute 'name'");
         }
 
         private string GetTableOfContents(XmlMethodPart part)
@@ -213,7 +228,7 @@ namespace MarkdownMerge.Commands
                     strBuilder.Append(new String(' ', header.Level.Length));
 
                 strBuilder.Append("*");
-                strBuilder.Append($" " + GetLinkFromAnchor(header.Name, header.Anchor.Name));
+                strBuilder.Append($" " + GetLinkFromAnchor(header.Title, header.Anchor.Name));
                 if (header != headers.LastOrDefault())
                     strBuilder.AppendLine();
             }
@@ -231,7 +246,7 @@ namespace MarkdownMerge.Commands
 
         private string GetAnchor(string name, string text)
         {
-            return $@"{text}<a name=""{name}""></a>";
+            return $@"<a name=""{name}""></a>{text}";
         }
 
         #endregion

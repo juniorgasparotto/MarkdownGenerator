@@ -9,7 +9,7 @@ namespace MarkdownMerge
     {
         static int Main(string[] args)
         {
-            // sample: -i Sample/Index.md
+            // sample: -i Sample/Index.md Sample/Index2.md
             return App.RunApplication(() =>
             {
                 var loader = new AppDomainCommandLoader();
