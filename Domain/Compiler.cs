@@ -225,7 +225,7 @@ namespace MarkdownMerge.Commands
             foreach (var header in headers)
             {
                 if (header.Level.Length > 1)
-                    strBuilder.Append(new String(' ', header.Level.Length));
+                    strBuilder.Append(new String(' ', (header.Level.Length - 1) * 2));
 
                 strBuilder.Append("*");
                 strBuilder.Append($" " + GetLinkFromAnchor(header.Title, header.Anchor.Name));
