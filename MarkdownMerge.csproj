@@ -61,23 +61,18 @@
     <SignManifests>true</SignManifests>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Newtonsoft.Json, Version=9.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>dll\Newtonsoft.Json.dll</HintPath>
+    <Reference Include="Newtonsoft.Json, Version=10.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>packages\Newtonsoft.Json.10.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="SysCommand, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>dll\SysCommand.dll</HintPath>
-    </Reference>
-    <Reference Include="SysCommand.ConsoleApp, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>dll\SysCommand.ConsoleApp.dll</HintPath>
+      <HintPath>packages\SysCommand.1.0.7\lib\net45\SysCommand.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.ServiceModel" />
     <Reference Include="System.Web.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>dll\System.Web.Razor.dll</HintPath>
+      <HintPath>packages\Microsoft.AspNet.Razor.3.0.0\lib\net45\System.Web.Razor.dll</HintPath>
     </Reference>
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -87,29 +82,88 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Helpers\MarkdownHelper.cs" />
+    <Compile Include="Helpers\StringHelper.cs" />
+    <Compile Include="Xml\ContentElements\ElementNamesConstants.cs" />
+    <Compile Include="Xml\ContentElements\NodeBase.cs" />
+    <Compile Include="Xml\ContentElements\Unknown.cs" />
+    <Compile Include="Xml\ContentElements\TextPlain.cs" />
+    <Compile Include="Xml\ContentElements\AnchorGet.cs" />
+    <Compile Include="Xml\ContentElements\AnchorSet.cs" />
+    <Compile Include="Xml\ContentElements\TableOfContents.cs" />
+    <Compile Include="Xml\ContentElements\HeaderSet.cs" />
+    <Compile Include="Xml\Documentation.cs" />
+    <Compile Include="Xml\Language.cs" />
+    <Compile Include="Xml\Page.cs" />
+    <Compile Include="Translator\AzureAuthToken.cs" />
+    <Compile Include="Connected Services\TranslatorService\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
     <Compile Include="Domain\Compiler.cs" />
-    <Compile Include="Domain\XmlMethodTag.cs" />
+    <Compile Include="Domain\XmlMethod.cs" />
     <Compile Include="Domain\XmlMethodPart.cs" />
     <Compile Include="Domain\RealStringPart.cs" />
     <Compile Include="Domain\Anchor.cs" />
     <Compile Include="Domain\StringPart.cs" />
     <Compile Include="Domain\Header.cs" />
     <Compile Include="Commands\MarkdownCommand.cs" />
-    <None Include="Sample\Doc3.md">
+    <Compile Include="Translator\Translator.cs" />
+    <Compile Include="Xml\Extensions\XInclude.cs" />
+    <Compile Include="Xml\Version.cs" />
+    <None Include="Connected Services\TranslatorService\MarkdownMerge.TranslatorService.GetTranslationsResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\TranslatorService\MarkdownMerge.TranslatorService.TranslateArray2Response.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\TranslatorService\MarkdownMerge.TranslatorService.TranslateArrayResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\TranslatorService\soap.wsdl" />
+    <None Include="Connected Services\TranslatorService\soap.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Connected Services\TranslatorService\soap1.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Connected Services\TranslatorService\soap2.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Connected Services\TranslatorService\soap3.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Connected Services\TranslatorService\SoapService.wsdl" />
+    <None Include="packages.config" />
+    <None Include="Sample\Page2.md">
+      <SubType>Designer</SubType>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="Sample\Doc2.md">
+    <None Include="Sample\Page2_2.md">
+      <SubType>Designer</SubType>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="Sample\Doc1.md">
+    <None Include="Sample\Page1_2.md">
+      <SubType>Designer</SubType>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="Sample\Index2.md">
+    <None Include="Sample\Page1.md">
+      <SubType>Designer</SubType>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="Sample\Index.md">
+    <None Include="Sample\Page2_Index.md">
+      <SubType>Designer</SubType>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Include="Sample\Page1_Index.md">
+      <SubType>Designer</SubType>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <Content Include="Sample\Sample.xml">
+      <SubType>Designer</SubType>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -128,6 +182,21 @@
       <Install>false</Install>
     </BootstrapperPackage>
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\TranslatorService\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+    <None Include="Connected Services\TranslatorService\configuration.svcinfo" />
+    <None Include="Connected Services\TranslatorService\configuration91.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Connected Services\" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadataStorage Include="Connected Services\TranslatorService\" />
+  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

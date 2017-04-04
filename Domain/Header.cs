@@ -1,9 +1,4 @@
-﻿using SysCommand.ConsoleApp;
-using SysCommand.ConsoleApp.Helpers;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-namespace MarkdownMerge.Commands
+﻿namespace MarkdownMerge.Commands
 {
     public class Header
     {
