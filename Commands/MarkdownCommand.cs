@@ -70,26 +70,26 @@ namespace MarkdownMerge.Commands
 
         public void ConvertMdFileToHtml(string baseDir)
         {
-            var file = @"D:\Junior\Projetos\GITHUB.COM\juniorgasparotto\SysCommand\doc\pt-br\input\support-types.html";
-            var fileTraduzido = @"D:\Junior\Projetos\GITHUB.COM\juniorgasparotto\SysCommand\doc\pt-br\input\support-types-traduzido.html";
-            var fileMk = @"D:\Junior\Projetos\GITHUB.COM\juniorgasparotto\SysCommand\doc\pt-br\input\support-types-markdown.html";
-            //var html2 = Translation.Translator.Translate(File.ReadAllText(file), "pt-br", "en-us");
-            var html2 = File.ReadAllText(file);
-            FileHelper.SaveContentToFile(html2, fileTraduzido);
-            var converter2 = new Converter();
-            var d = converter2.Convert(html2);
-            FileHelper.SaveContentToFile(d, fileMk);
-            return;
+            //var file = @"D:\Junior\Projetos\GITHUB.COM\juniorgasparotto\SysCommand\doc\pt-br\input\support-types.html";
+            //var fileTraduzido = @"D:\Junior\Projetos\GITHUB.COM\juniorgasparotto\SysCommand\doc\pt-br\input\support-types-traduzido.html";
+            //var fileMk = @"D:\Junior\Projetos\GITHUB.COM\juniorgasparotto\SysCommand\doc\pt-br\input\support-types-markdown.html";
+            ////var html2 = Translation.Translator.Translate(File.ReadAllText(file), "pt-br", "en-us");
+            //var html2 = File.ReadAllText(file);
+            //FileHelper.SaveContentToFile(html2, fileTraduzido);
+            //var converter2 = new Converter();
+            //var d = converter2.Convert(html2);
+            //FileHelper.SaveContentToFile(d, fileMk);
+            //return;
             DirectoryHelper.FindFiles(baseDir, path =>
             {
                 var str = FileHelper.GetContentFromFile(path);
-                var fileBaseDir = Path.GetDirectoryName(path);
+                var fileBaseDir = Path.GetDirectoryName(path).Replace("pt-br", "pt-br2");
                 var fileName = Path.GetFileNameWithoutExtension(path);
-                var htmlFile = Path.Combine(fileBaseDir, fileName + ".html");
+                var htmlFile = Path.Combine(fileBaseDir, fileName + ".md");
                 var html = Markdown.ToHtml(str);
                 var converter = new Converter();
                 string result = converter.Convert(html);
-                FileHelper.SaveContentToFile(html, htmlFile);
+                FileHelper.SaveContentToFile(result, htmlFile);
             }, "*.md");
         }
 
