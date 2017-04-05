@@ -5,6 +5,13 @@ using System.Linq;
 using SysCommand.Mapping;
 using MarkdownMerge.Xml.Content;
 using MarkdownMerge.Xml;
+using MarkdownMerge.Helpers;
+using System.IO;
+using Markdig;
+using Html2Markdown;
+using Markdig.Renderers;
+using System;
+using Markdig.Syntax;
 
 namespace MarkdownMerge.Commands
 {
@@ -61,14 +68,39 @@ namespace MarkdownMerge.Commands
         //    return content;
         //}
 
+        public void ConvertMdFileToHtml(string baseDir)
+        {
+            var file = @"D:\Junior\Projetos\GITHUB.COM\juniorgasparotto\SysCommand\doc\pt-br\input\support-types.html";
+            var fileTraduzido = @"D:\Junior\Projetos\GITHUB.COM\juniorgasparotto\SysCommand\doc\pt-br\input\support-types-traduzido.html";
+            var fileMk = @"D:\Junior\Projetos\GITHUB.COM\juniorgasparotto\SysCommand\doc\pt-br\input\support-types-markdown.html";
+            //var html2 = Translation.Translator.Translate(File.ReadAllText(file), "pt-br", "en-us");
+            var html2 = File.ReadAllText(file);
+            FileHelper.SaveContentToFile(html2, fileTraduzido);
+            var converter2 = new Converter();
+            var d = converter2.Convert(html2);
+            FileHelper.SaveContentToFile(d, fileMk);
+            return;
+            DirectoryHelper.FindFiles(baseDir, path =>
+            {
+                var str = FileHelper.GetContentFromFile(path);
+                var fileBaseDir = Path.GetDirectoryName(path);
+                var fileName = Path.GetFileNameWithoutExtension(path);
+                var htmlFile = Path.Combine(fileBaseDir, fileName + ".html");
+                var html = Markdown.ToHtml(str);
+                var converter = new Converter();
+                string result = converter.Convert(html);
+                FileHelper.SaveContentToFile(html, htmlFile);
+            }, "*.md");
+        }
+
         public void Main(
             [Argument(LongName = "config", ShortName = 'c', Help = "Config file")]
             string config = "Sample/Sample.xml"
         )
         {
-            App.Console.Write(Translation.Translator.Translate(config, "pt-br", "en-us"));
-            //var doc = new Documentation(config);
-            //doc.Save();
+            //App.Console.Write(Translation.Translator.Translate(config, "pt-br", "en-us"));
+            var doc = new Documentation(config);
+            doc.Save();
         }
     }
 }

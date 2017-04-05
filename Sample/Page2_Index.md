@@ -1,11 +1,19 @@
-﻿<header-set name="title1" heading="1">Documentação</header-set>
+﻿<h1 name="title1">Documentação</h1>
 
-Link para o **readme**: <anchor-get name="readme" />
-Link para o **readme** com texto customizado: <anchor-get name="readme">Texto customizado</anchor-get>
-Ancora aqui: <anchor-set name="documentation">ancora dentro da documentação</anchor-set>
+<p>
+  Link para o **readme**: <anchor-get name="readme" />
+</p>
 
-Primeiro include:
+<p>
+  Link para o **readme** com texto customizado: <anchor-get name="readme">Texto customizado</anchor-get>
+</p>
+
+<p>
+  Ancora aqui: <anchor-set name="documentation">ancora dentro da documentação</anchor-set>
+</p>
+
+<p>Primeiro include:</p>
 <include href="Sample/Page2.md" />
 
-Segundo include:
+<p>Segundo include:</p>
 <include href="Sample/Page2_2.md" />

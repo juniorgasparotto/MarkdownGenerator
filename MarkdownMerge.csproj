@@ -61,6 +61,12 @@
     <SignManifests>true</SignManifests>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="HtmlAgilityPack, Version=1.4.9.5, Culture=neutral, PublicKeyToken=bd319b19eaf3b43a, processorArchitecture=MSIL">
+      <HintPath>packages\HtmlAgilityPack.1.4.9.5\lib\Net45\HtmlAgilityPack.dll</HintPath>
+    </Reference>
+    <Reference Include="Markdig, Version=0.10.7.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>packages\Markdig.0.10.7\lib\net40\Markdig.dll</HintPath>
+    </Reference>
     <Reference Include="Newtonsoft.Json, Version=10.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>packages\Newtonsoft.Json.10.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
@@ -68,6 +74,7 @@
       <HintPath>packages\SysCommand.1.0.7\lib\net45\SysCommand.dll</HintPath>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.ServiceModel" />
@@ -82,8 +89,16 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Helpers\DirectoryHelper.cs" />
     <Compile Include="Helpers\MarkdownHelper.cs" />
+    <Compile Include="Helpers\MarkdownSharp.cs" />
     <Compile Include="Helpers\StringHelper.cs" />
+    <Compile Include="Html2Markdown\Converter.cs" />
+    <Compile Include="Html2Markdown\CustomReplacer.cs" />
+    <Compile Include="Html2Markdown\HtmlAgilityPackExtensions.cs" />
+    <Compile Include="Html2Markdown\HtmlParser.cs" />
+    <Compile Include="Html2Markdown\IReplacer.cs" />
+    <Compile Include="Html2Markdown\PatternReplacer.cs" />
     <Compile Include="Xml\ContentElements\ElementNamesConstants.cs" />
     <Compile Include="Xml\ContentElements\NodeBase.cs" />
     <Compile Include="Xml\ContentElements\Unknown.cs" />
@@ -93,6 +108,7 @@
     <Compile Include="Xml\ContentElements\TableOfContents.cs" />
     <Compile Include="Xml\ContentElements\HeaderSet.cs" />
     <Compile Include="Xml\Documentation.cs" />
+    <Compile Include="Xml\Extensions\XExtensions.cs" />
     <Compile Include="Xml\Language.cs" />
     <Compile Include="Xml\Page.cs" />
     <Compile Include="Translator\AzureAuthToken.cs" />

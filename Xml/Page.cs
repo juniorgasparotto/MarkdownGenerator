@@ -5,6 +5,8 @@ using System.Xml;
 using System.Xml.Linq;
 using System;
 using SysCommand.ConsoleApp.Helpers;
+using MarkdownMerge.Translation;
+using MarkdownMerge.Xml.Extensions;
 
 namespace MarkdownMerge.Xml
 {
@@ -19,7 +21,65 @@ namespace MarkdownMerge.Xml
             this.ParseVersions(xpage);
 
             foreach(var version in Versions)
-                this.ParseContent(xpage.Element("content"), version, true);
+            {
+                version.XContent = CopyContent(xpage);
+                PrepareContentToNoTranslations(version);
+                TranslateContent(version);
+                PrepareContentToCustomTranslation(version);
+                //this.ParseContent(xpage.Element("content"), version, true);
+            }
+        }
+
+        private XElement CopyContent(XElement xpage)
+        {
+            return CreateElement(xpage.Element("content").OuterXml());
+        }
+
+        private XElement CreateElement(string xml)
+        {
+            return XDocument.Parse(xml).Root;
+        }
+
+        private void TranslateContent(Version version)
+        {
+            var fromLang = GetDefaultVersion().Language.Name;
+            var toLang = version.Language.Name;
+            if (fromLang != toLang)
+                version.XContent = CreateElement(Translator.Translate(version.XContent.OuterXml(), fromLang, toLang));
+        }
+
+        private void PrepareContentToCustomTranslation(Version version)
+        {
+            var xCustomTranslations = version.XContent.Elements(ElementNamesConstants.CustomTranslation);
+
+            foreach (var customTranslation in xCustomTranslations)
+            {
+                if (version == GetDefaultVersion())
+                {
+                    var original = customTranslation.Element(ElementNamesConstants.CustomTranslationDefault);
+                    customTranslation.ReplaceWith(original.Nodes());
+                }
+                else
+                {
+                    foreach (var lang in customTranslation.Elements(ElementNamesConstants.CustomTranslationLanguage))
+                    {
+                        if (lang.Attribute("name").Value == version.Language.Name)
+                        {
+                            customTranslation.ReplaceWith(lang.Nodes());
+                            break;
+                        }
+                    }
+                }
+            }
+        }
+
+        private void PrepareContentToNoTranslations(Version version)
+        {
+            foreach (var e in version.XContent.Elements(ElementNamesConstants.NoTranslation))
+                e.SetAttributeValue("class", "notranslate");
+
+            foreach (var e in version.XContent.Elements(ElementNamesConstants.CustomTranslation))
+                e.SetAttributeValue("class", "notranslate");
         }
 
         private void ParseVersions(XElement xpage)
@@ -106,7 +166,7 @@ namespace MarkdownMerge.Xml
         public void Save()
         {
             foreach (var version in Versions)
-                FileHelper.SaveContentToFile(version.GetContent(), version.Language.Output);
+                FileHelper.SaveContentToFile(version.GetMarkdown(), version.Language.Output);
         }
     }
 }
