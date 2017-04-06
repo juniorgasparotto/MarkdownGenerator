@@ -21,67 +21,72 @@ namespace Html2Markdown
 			},
 			new PatternReplacer
 			{
-				Pattern = @"</?(em|i)>",
+				Pattern = @"</?(em)>",
 				Replacement = @"*"
 			},
-			new PatternReplacer
+            new PatternReplacer
+            {
+                Pattern = @"</?(i)>",
+                Replacement = @"_"
+            },
+            new PatternReplacer
 			{
 				Pattern = @"</h[1-6]>",
 				Replacement = Environment.NewLine + Environment.NewLine
 			},
 			new PatternReplacer
 			{
-				Pattern = @"<h1[^>]*>",
+				Pattern = @"<h1(\s[^>]*>|/?>)",
 				Replacement = Environment.NewLine + Environment.NewLine + "# "
 			},
 			new PatternReplacer
 			{
-				Pattern = @"<h2[^>]*>",
+				Pattern = @"<h2(\s[^>]*>|/?>)",
 				Replacement = Environment.NewLine + Environment.NewLine + "## "
 			},
 			new PatternReplacer
 			{
-				Pattern = @"<h3[^>]*>",
+				Pattern = @"<h3(\s[^>]*>|/?>)",
 				Replacement = Environment.NewLine + Environment.NewLine + "### "
 			},
 			new PatternReplacer
 			{
-				Pattern = @"<h4[^>]*>",
+				Pattern = @"<h4(\s[^>]*>|/?>)",
 				Replacement = Environment.NewLine + Environment.NewLine + "#### "
 			},
 			new PatternReplacer
 			{
-				Pattern = @"<h5[^>]*>",
+				Pattern = @"<h5(\s[^>]*>|/?>)",
 				Replacement = Environment.NewLine + Environment.NewLine + "##### "
 			},
 			new PatternReplacer
 			{
-				Pattern = @"<h6[^>]*>",
+				Pattern = @"<h6(\s[^>]*>|/?>)",
 				Replacement = Environment.NewLine + Environment.NewLine + "###### "
 			},
 			new PatternReplacer
 			{
-				Pattern = @"<hr[^>]*>",
+				Pattern = @"<hr(\s[^>]*>|/?>)",
 				Replacement = Environment.NewLine + Environment.NewLine + "* * *" + Environment.NewLine
 			},
 			new PatternReplacer
 			{
-				Pattern = @"<!DOCTYPE[^>]*>",
+				Pattern = @"<!DOCTYPE(\s[^>]*>|/?>)",
 				Replacement = ""
 			},
 			new PatternReplacer
 			{
-				Pattern = @"</?html[^>]*>",
+				Pattern = @"</?html(\s[^>]*>|/?>)",
 				Replacement = ""
 			},
 			new PatternReplacer
 			{
-				Pattern = @"</?head[^>]*>",
+				Pattern = @"</?head(\s[^>]*>|/?>)",
 				Replacement = ""
 			},
 			new PatternReplacer
 			{
-				Pattern = @"</?body[^>]*>",
+				Pattern = @"</?body(\s[^>]*>|/?>)",
 				Replacement = ""
 			},
 			new PatternReplacer
@@ -91,12 +96,12 @@ namespace Html2Markdown
 			},
 			new PatternReplacer
 			{
-				Pattern = @"<meta[^>]*>",
+				Pattern = @"<meta(\s[^>]*>|/?>)",
 				Replacement = ""
 			},
 			new PatternReplacer
 			{
-				Pattern = @"<link[^>]*>",
+				Pattern = @"<link(\s[^>]*>|/?>)",
 				Replacement = ""
 			},
 			new PatternReplacer
@@ -130,7 +135,7 @@ namespace Html2Markdown
 			},
 			new PatternReplacer
 			{
-				Pattern = @"<br[^>]*>",
+				Pattern = @"<br(\s[^>]*>|/?>)",
 				Replacement = @"  " + Environment.NewLine
 			},
 			new CustomReplacer

@@ -4,6 +4,7 @@ using System.Linq;
 using System.Net;
 using System.Text.RegularExpressions;
 using HtmlAgilityPack;
+using System.Text;
 
 namespace Html2Markdown.Replacement
 {
@@ -11,19 +12,85 @@ namespace Html2Markdown.Replacement
 	{
 		private static readonly Regex NoChildren = new Regex(@"<(ul|ol)\b[^>]*>(?:(?!<ul|<ol)[\s\S])*?<\/\1>");
 
-		internal static string ReplaceLists(string html)
+        internal static string ReplaceLists(string html)
+        {
+            var doc = GetHtmlDocument(html);
+
+            var nodes = new List<HtmlNode>();
+            var ulList = doc.DocumentNode.SelectNodes("//ul");
+            var olList = doc.DocumentNode.SelectNodes("//ol");
+
+            if (ulList != null)
+                nodes.AddRange(ulList);
+            if (olList != null)
+                nodes.AddRange(olList);
+
+            nodes.RemoveAll(f => f.Ancestors("ul").Any() || f.Ancestors("ol").Any());
+
+            foreach (var node in nodes)
+            {
+                var str = ReplaceLists(node);
+                ReplaceNode(node, str);
+            }
+
+            return doc.DocumentNode.OuterHtml;
+        }
+
+        private static string ReplaceLists(HtmlNode node)
+        {
+            var strBuilder = new StringBuilder();
+            var counterOl = 1;
+            var spacerCount = node.Ancestors().Where(f => f.Name == "ul" || f.Name == "ol").Count();
+            var spacer = new string(' ', spacerCount * 2);
+
+            foreach (var li in node.ChildNodes.Where(f => f.Name == "li"))
+            {
+                var tag = spacer + (node.Name == "ul" ? "* " : counterOl++.ToString() + ". ");
+                if (strBuilder.Length == 0)
+                    strBuilder.Append(tag);
+                else
+                    strBuilder.AppendLine().Append(tag);
+
+                var first = true;
+                foreach (var el in li.ChildNodes)
+                {
+                    if (el.Name == "ul" || el.Name == "ol")
+                    { 
+                        strBuilder.AppendLine().Append(ReplaceLists(el));
+                    }
+                    else
+                    {
+                        var hasElement = el.OuterHtml.StartsWith("<");
+
+                        if (!first && hasElement)
+                            strBuilder.Append(" ");
+
+                        strBuilder.Append(el.OuterHtml.Trim());
+
+                        if (hasElement && !string.IsNullOrWhiteSpace(el.NextSibling?.OuterHtml))
+                            strBuilder.Append(" ");
+                    }
+
+                    first = false;
+                }
+            }
+            var output = strBuilder.ToString();
+            return output;
+        }
+
+        internal static string ReplaceLists2(string html)
 		{
 			while (HasNoChildLists(html))
 			{
 				var listToReplace = NoChildren.Match(html).Value;
-				var formattedList = ReplaceList(listToReplace);
+				var formattedList = ReplaceList2(listToReplace);
 				html = html.Replace(listToReplace, formattedList);
 			}
 
 			return html;
 		}
 
-		private static string ReplaceList(string html)
+		private static string ReplaceList2(string html)
 		{
 			var list = Regex.Match(html, @"<(ul|ol)\b[^>]*>([\s\S]*?)<\/\1>");
 			var listType = list.Groups[1].Value;
