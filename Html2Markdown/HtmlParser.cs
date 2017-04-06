@@ -52,6 +52,8 @@ namespace Html2Markdown.Replacement
                     strBuilder.AppendLine().Append(tag);
 
                 var first = true;
+                var lastEl = li.ChildNodes.LastOrDefault();
+
                 foreach (var el in li.ChildNodes)
                 {
                     if (el.Name == "ul" || el.Name == "ol")
@@ -60,15 +62,14 @@ namespace Html2Markdown.Replacement
                     }
                     else
                     {
-                        var hasElement = el.OuterHtml.StartsWith("<");
+                        var outputEl = Regex.Replace(el.OuterHtml, @"\s+", " ");
 
-                        if (!first && hasElement)
-                            strBuilder.Append(" ");
+                        if (first)
+                            outputEl = outputEl.TrimStart();
 
-                        strBuilder.Append(el.OuterHtml.Trim());
-
-                        if (hasElement && !string.IsNullOrWhiteSpace(el.NextSibling?.OuterHtml))
-                            strBuilder.Append(" ");
+                        if (el == lastEl)
+                            outputEl = outputEl.TrimEnd();
+                        strBuilder.Append(outputEl);
                     }
 
                     first = false;
