@@ -305,14 +305,16 @@ namespace Html2Markdown.Replacement
 
 		private static void ReplaceNode(HtmlNode node, string markdown)
 		{
-			var markdownNode = HtmlNode.CreateNode(markdown);
-			if (string.IsNullOrEmpty(markdown))
+            var doc = GetHtmlDocument(markdown);
+            var markdownNode = doc.DocumentNode; //HtmlNode.CreateNode(markdown);
+
+            if (string.IsNullOrEmpty(markdown))
 			{
 				node.ParentNode.RemoveChild(node);
 			}
 			else
 			{
-				node.ParentNode.ReplaceChild(markdownNode.ParentNode, node);
+				node.ParentNode.ReplaceChild(markdownNode, node);
 			}
 			
 		}
