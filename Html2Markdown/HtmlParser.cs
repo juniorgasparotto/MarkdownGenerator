@@ -69,6 +69,10 @@ namespace Html2Markdown.Replacement
 
                         if (el == lastEl)
                             outputEl = outputEl.TrimEnd();
+
+                        if (el.NextSibling?.Name == "ul" || el.NextSibling?.Name == "ol")
+                            outputEl = outputEl.TrimEnd();
+
                         strBuilder.Append(outputEl);
                     }
 
@@ -222,7 +226,7 @@ namespace Html2Markdown.Replacement
                     if (!code.EndsWith("\n"))
                         code = code + "\r\n";
 
-                    markdown = $"```{sclass}{code}```";
+                    markdown = $"\r\n```{sclass}{code}```\r\n";
                 }
                 else
                 {
@@ -233,24 +237,6 @@ namespace Html2Markdown.Replacement
             });
 
             return doc.DocumentNode.OuterHtml;
-            //var singleLineCodeBlocks = new Regex(@"<code>([^\n]*?)</code>").Matches(html);
-            //singleLineCodeBlocks.Cast<Match>().ToList().ForEach(block =>
-            //{
-            //	var code = block.Value;
-            //	var content = GetCodeContent(code);
-            //	html = html.Replace(code, string.Format("`{0}`", content));
-            //});
-
-            //var multiLineCodeBlocks = new Regex(@"<code>([^>]*?)</code>").Matches(html);
-            //multiLineCodeBlocks.Cast<Match>().ToList().ForEach(block =>
-            //{
-            //	var code = block.Value;
-            //	var content = GetCodeContent(code);
-            //	content = IndentLines(content).TrimEnd() + Environment.NewLine + Environment.NewLine;
-            //	html = html.Replace(code, string.Format("```\r\n{0}\r\n```", TabsToSpaces(content)));
-            //});
-
-            //return html;
         }
 
 		public static string ReplaceBlockquote(string html)
@@ -312,8 +298,9 @@ namespace Html2Markdown.Replacement
 		private static HtmlDocument GetHtmlDocument(string html)
 		{
 			var doc = new HtmlDocument();
-			doc.LoadHtml(html);
-			return doc;
+            doc.OptionWriteEmptyNodes = true;
+            doc.LoadHtml(html);
+            return doc;
 		}
 
 		private static void ReplaceNode(HtmlNode node, string markdown)

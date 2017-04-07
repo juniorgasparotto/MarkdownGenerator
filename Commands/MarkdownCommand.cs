@@ -12,6 +12,7 @@ using Html2Markdown;
 using Markdig.Renderers;
 using System;
 using Markdig.Syntax;
+using HtmlAgilityPack;
 
 namespace MarkdownMerge.Commands
 {
@@ -20,6 +21,11 @@ namespace MarkdownMerge.Commands
         public MarkdownCommand()
         {
             this.HelpText = "Merge markdown files; Generate automatic table of contents; Generate anchor reference;";
+
+            HtmlNode.ElementsFlags["header-set"] = HtmlElementFlag.Empty;
+            HtmlNode.ElementsFlags["header-get"] = HtmlElementFlag.Empty;
+            HtmlNode.ElementsFlags["anchor-get"] = HtmlElementFlag.Empty;
+            HtmlNode.ElementsFlags["anchor-set"] = HtmlElementFlag.Empty;
         }
 
         //public string Main(
@@ -70,16 +76,16 @@ namespace MarkdownMerge.Commands
 
         public void ConvertMdFileToHtml(string baseDir)
         {
-            //var path2 = @"D:\Junior\Projetos\GITHUB.COM\juniorgasparotto\SysCommand\doc\pt-br\extras\extras.md";
-            //var str = FileHelper.GetContentFromFile(path2);
-            //var fileBaseDir = Path.GetDirectoryName(path2).Replace("pt-br", "pt-br2");
-            //var fileName = Path.GetFileNameWithoutExtension(path2);
-            //var htmlFile = Path.Combine(fileBaseDir, fileName + ".md");
-            //var html = Markdown.ToHtml(str);
-            //var converter = new Converter();
-            //string result = converter.Convert(html);
-            //FileHelper.SaveContentToFile(result, htmlFile);
-            //return;
+            var path2 = @"D:\Junior\Projetos\GITHUB.COM\juniorgasparotto\SysCommand\doc\pt-br\getting-start\specifying-commands.md";
+            var str = FileHelper.GetContentFromFile(path2);
+            var fileBaseDir = Path.GetDirectoryName(path2).Replace("pt-br", "pt-br2");
+            var fileName = Path.GetFileNameWithoutExtension(path2);
+            var htmlFile = Path.Combine(fileBaseDir, fileName + ".md");
+            var html = Markdown.ToHtml(str);
+            var converter = new Converter();
+            string result = converter.Convert(html);
+            FileHelper.SaveContentToFile(result, htmlFile);
+            return;
             //var file = @"D:\Junior\Projetos\GITHUB.COM\juniorgasparotto\SysCommand\doc\pt-br\input\support-types.html";
             //var fileTraduzido = @"D:\Junior\Projetos\GITHUB.COM\juniorgasparotto\SysCommand\doc\pt-br\input\support-types-traduzido.html";
             //var fileMk = @"D:\Junior\Projetos\GITHUB.COM\juniorgasparotto\SysCommand\doc\pt-br\input\support-types-markdown.html";
@@ -90,17 +96,17 @@ namespace MarkdownMerge.Commands
             //var d = converter2.Convert(html2);
             //FileHelper.SaveContentToFile(d, fileMk);
             //return;
-            DirectoryHelper.FindFiles(baseDir, path =>
-            {
-                var str = FileHelper.GetContentFromFile(path);
-                var fileBaseDir = Path.GetDirectoryName(path).Replace("pt-br", "pt-br2");
-                var fileName = Path.GetFileNameWithoutExtension(path);
-                var htmlFile = Path.Combine(fileBaseDir, fileName + ".md");
-                var html = Markdown.ToHtml(str);
-                var converter = new Converter();
-                string result = converter.Convert(html);
-                FileHelper.SaveContentToFile(result, htmlFile);
-            }, "*.md");
+            //DirectoryHelper.FindFiles(baseDir, path =>
+            //{
+            //    var str = FileHelper.GetContentFromFile(path);
+            //    var fileBaseDir = Path.GetDirectoryName(path).Replace("pt-br", "pt-br2");
+            //    var fileName = Path.GetFileNameWithoutExtension(path);
+            //    var htmlFile = Path.Combine(fileBaseDir, fileName + ".md");
+            //    var html = Markdown.ToHtml(str);
+            //    var converter = new Converter();
+            //    string result = converter.Convert(html);
+            //    FileHelper.SaveContentToFile(result, htmlFile);
+            //}, "*.md");
         }
 
         public void Main(
