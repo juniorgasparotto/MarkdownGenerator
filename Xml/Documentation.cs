@@ -25,7 +25,10 @@ namespace MarkdownMerge.Xml
         public void Save()
         {
             foreach (var page in Pages)
+            {
+                page.ProcessElements();
                 page.Save();
+            }
         }
 
         public IEnumerable<Version> GetVersionsFromLanguage(Language language)

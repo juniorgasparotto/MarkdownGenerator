@@ -3,35 +3,37 @@ using System.Xml.Linq;
 using System;
 using System.IO;
 using System.Linq;
+using HtmlAgilityPack;
+using Html2Markdown.Replacement;
 
 namespace MarkdownMerge.Xml.Content
 {
-    public class AnchorSet : NodeBase
+    public class AnchorSet : NodeBase, IAnchor
     {
-        public string Name { get; private set; }
-        public string Text { get; private set; }
+        public string Name { get; set; }
+        public string Text { get; set; }
 
-        public AnchorSet(Version version, XElement element, bool translated)
-            : base(version, element, translated)
+        public AnchorSet(Version version, HtmlNode element)
+            : base(version, element)
         {
-            this.Name = element.Attribute("name").Value;
-            this.Text = element.Value;
+            this.Name = element.Attributes["name"].Value;
+            this.Text = element.InnerHtml;
         }
 
         public string GetAnchorLink()
         {
-            var path = AppendUri(new Uri(Version.Page.Documentation.UrlBase), Version.Language.Output);
+            var path = StringHelper.AppendUri(new Uri(Version.Page.Documentation.UrlBase), Version.Language.Output);
             return path + "#" + Name;
         }
 
-        public static Uri AppendUri(Uri uri, params string[] paths)
+        public override void Process()
         {
-            return new Uri(paths.Aggregate(uri.AbsoluteUri, (current, path) => string.Format("{0}/{1}", current.TrimEnd('/'), path.TrimStart('/'))));
+            HtmlParser.ReplaceNode(Node, ToString());
         }
 
         public override string ToString()
         {
-            return MarkdownHelper.GetAnchor(Name, GetTranslate(Text));
+            return MarkdownHelper.GetAnchor(Name, Text);
         }
     }
 }

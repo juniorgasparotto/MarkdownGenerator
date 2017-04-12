@@ -187,31 +187,6 @@ namespace Html2Markdown
 			cleaned = Regex.Replace(cleaned, @"(> \r\n){2,}", "> \r\n");
             cleaned = Regex.Replace(cleaned, @"^(\r\n)+", "");
 			cleaned = Regex.Replace(cleaned, @"(\r\n)+$", "");
-
-            // add break line to code blocks when not exists, add 2 if not exists
-            // [add here] ```code
-   //         var countCodeDelimiter = 0;
-			//cleaned = Regex.Replace(cleaned, @"```", f =>
-   //         {
-   //             var retValue = f.Value;
-
-   //             if (countCodeDelimiter % 2 == 0)
-   //             { 
-   //                 var lastChar = cleaned.ElementAtOrDefault(f.Index - 1);
-   //                 var lastChar2 = cleaned.ElementAtOrDefault(f.Index - 2);
-   //                 var lastChar3 = cleaned.ElementAtOrDefault(f.Index - 3);
-
-   //                 if (lastChar != '\n')
-   //                     retValue = "\r\n\r\n" + f.Value;
-
-   //                 if (lastChar == '\n' && lastChar2 == '\r' && lastChar3 != '\n')
-   //                     retValue = "\r\n" + f.Value;
-   //             }
-
-   //             countCodeDelimiter++;
-   //             return retValue;
-   //         });
-
 			return cleaned;
 		}
 	}

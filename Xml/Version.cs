@@ -7,30 +7,22 @@ using System.IO;
 using System.Text;
 using System.Xml;
 using System.Xml.Linq;
+using System;
+using HtmlAgilityPack;
 
 namespace MarkdownMerge.Xml
 {
     public class Version
     {
-        public ItemCollection Items { get; } = new ItemCollection();
         public Language Language { get; set; }
         public List<NodeBase> Nodes { get; } = new List<NodeBase>();
         public Page Page { get; private set; }
-        public XElement XContent { get; internal set; }
+        public HtmlDocument XContent { get; internal set; }
+        public string Content { get; internal set; }
 
         public Version(Page page)
         {
             this.Page = page;
-        }
-
-        public string GetMarkdown()
-        {
-            var xml = PrettyXml(XContent.OuterXml());
-            return xml;
-            //var strBuilder = new StringBuilder();
-            //foreach (var element in Nodes)
-            //    strBuilder.Append(element.ToString());
-            //return strBuilder.ToString();
         }
 
         private string PrettyXml(string xml)

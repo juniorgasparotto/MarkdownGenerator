@@ -1,12 +1,15 @@
 ﻿using MarkdownMerge.Xml.Content;
 using System.Collections.Generic;
 using System.Linq;
-using System.Xml;
 using System.Xml.Linq;
-using System;
 using SysCommand.ConsoleApp.Helpers;
 using MarkdownMerge.Translation;
 using MarkdownMerge.Xml.Extensions;
+using Markdig;
+using Html2Markdown;
+using HtmlAgilityPack;
+using Html2Markdown.Replacement;
+using System;
 
 namespace MarkdownMerge.Xml
 {
@@ -22,64 +25,40 @@ namespace MarkdownMerge.Xml
 
             foreach(var version in Versions)
             {
-                version.XContent = CopyContent(xpage);
-                PrepareContentToNoTranslations(version);
-                TranslateContent(version);
-                PrepareContentToCustomTranslation(version);
-                //this.ParseContent(xpage.Element("content"), version, true);
+                var markdown = xpage.Element("content").InnerXml();
+                markdown = PrepareHtml(markdown);
+                var html = MarkdownToHtml(markdown);
+                //html = TranslateHtml(html, version.Language.Name);
+                version.XContent = HtmlParser.GetHtmlDocument(html);
+                ParseElements(version);
             }
         }
 
-        private XElement CopyContent(XElement xpage)
+        private string PrepareHtml(string html)
         {
-            return CreateElement(xpage.Element("content").OuterXml());
-        }
+            var htmlObj = HtmlParser.GetHtmlDocument(html);
 
-        private XElement CreateElement(string xml)
-        {
-            return XDocument.Parse(xml).Root;
-        }
-
-        private void TranslateContent(Version version)
-        {
-            var fromLang = GetDefaultVersion().Language.Name;
-            var toLang = version.Language.Name;
-            if (fromLang != toLang)
-                version.XContent = CreateElement(Translator.Translate(version.XContent.OuterXml(), fromLang, toLang));
-        }
-
-        private void PrepareContentToCustomTranslation(Version version)
-        {
-            var xCustomTranslations = version.XContent.Elements(ElementNamesConstants.CustomTranslation);
-
-            foreach (var customTranslation in xCustomTranslations)
-            {
-                if (version == GetDefaultVersion())
+            // remove spaces in no-translatin itens
+            var noTranslations = htmlObj.DocumentNode.Elements(ElementNamesConstants.NoTranslation);
+            if (noTranslations != null)
+            { 
+                foreach (var no in noTranslations)
                 {
-                    var original = customTranslation.Element(ElementNamesConstants.CustomTranslationDefault);
-                    customTranslation.ReplaceWith(original.Nodes());
-                }
-                else
-                {
-                    foreach (var lang in customTranslation.Elements(ElementNamesConstants.CustomTranslationLanguage))
-                    {
-                        if (lang.Attribute("name").Value == version.Language.Name)
-                        {
-                            customTranslation.ReplaceWith(lang.Nodes());
-                            break;
-                        }
-                    }
+                    no.Attributes.Add("class", ElementNamesConstants.NotTranslateDefinition);
+                    //no.InnerHtml = no.InnerHtml.Trim();
                 }
             }
-        }
 
-        private void PrepareContentToNoTranslations(Version version)
-        {
-            foreach (var e in version.XContent.Elements(ElementNamesConstants.NoTranslation))
-                e.SetAttributeValue("class", "notranslate");
+            // add notranslate attr in custom translations
+            var customTransaltions = htmlObj.DocumentNode.Elements(ElementNamesConstants.CustomTranslation);
+            if (customTransaltions != null)
+            { 
+                if (customTransaltions != null)
+                    foreach (var custom in customTransaltions)
+                        custom.Attributes.Add("class", ElementNamesConstants.NotTranslateDefinition);
+            }
 
-            foreach (var e in version.XContent.Elements(ElementNamesConstants.CustomTranslation))
-                e.SetAttributeValue("class", "notranslate");
+            return htmlObj.DocumentNode.OuterHtml;
         }
 
         private void ParseVersions(XElement xpage)
@@ -101,61 +80,105 @@ namespace MarkdownMerge.Xml
             }
         }
 
-        private void ParseContent(XElement xCurrentNode, Version version, bool translated)
+        private void ParseElements(Version version)
         {
-            foreach (XNode xnode in xCurrentNode.Nodes())
+            ParseNoTranslate(version.XContent.DocumentNode.SelectNodes("//" + ElementNamesConstants.NoTranslation));
+            ParseCustomTranslation(version.XContent.DocumentNode.SelectNodes("//" + ElementNamesConstants.CustomTranslation)?.ToArray(), version);
+
+            ParseElements(version.XContent.DocumentNode.SelectNodes("//" + ElementNamesConstants.HeaderSet)?.ToArray(), version);
+            ParseElements(version.XContent.DocumentNode.SelectNodes("//" + ElementNamesConstants.AnchorSet)?.ToArray(), version);
+            ParseElements(version.XContent.DocumentNode.SelectNodes("//" + ElementNamesConstants.AnchorGet)?.ToArray(), version);
+            ParseElements(version.XContent.DocumentNode.SelectNodes("//" + ElementNamesConstants.TableOfContents)?.ToArray(), version);
+        }
+
+        private void ParseElements(IEnumerable<HtmlNode> elements, Version version)
+        {
+            if (elements == null)
+                return;
+
+            foreach (var element in elements)
             {
-                if (xnode.NodeType == XmlNodeType.Element)
+                switch (element.Name)
                 {
-                    var element = (XElement)xnode;
-                    switch (element.Name.LocalName)
-                    {
-                        case ElementNamesConstants.AnchorSet:
-                            new AnchorSet(version, element, translated);
-                            break;
-                        case ElementNamesConstants.AnchorGet:
-                            new AnchorGet(version, element, translated);
-                            break;
-                        case ElementNamesConstants.HeaderSet:
-                            new HeaderSet(version, element, translated);
-                            break;
-                        case ElementNamesConstants.TableOfContents:
-                            new TableOfContents(version, element, translated);
-                            break;
-                        case ElementNamesConstants.NoTranslation:
-                            ParseContent(element, version, false);
-                            break;
-                        case ElementNamesConstants.CustomTranslation:
-                            if (version == GetDefaultVersion())
-                            {
-                                ParseContent(element.Element(ElementNamesConstants.CustomTranslationDefault), version, translated);
-                            }
-                            else
-                            {
-                                foreach (var lang in element.Elements(ElementNamesConstants.CustomTranslationLanguage))
-                                {
-                                    if (lang.Attribute("name").Value == version.Language.Name)
-                                    { 
-                                        ParseContent(lang, version, translated);
-                                        break;
-                                    }
-                                }
-                            }
-                            break;
-                        default:
-                            new Unknown(version, element, translated);
-                            break;
-                    }
-                }
-                else if (xnode.NodeType == XmlNodeType.CDATA)
-                {
-                    new TextPlain(version, (XText)xnode, translated);
-                }
-                else if (xnode.NodeType == XmlNodeType.Text)
-                {
-                    new TextPlain(version, (XText)xnode, translated);
+                    case ElementNamesConstants.AnchorSet:
+                        new AnchorSet(version, element);
+                        break;
+                    case ElementNamesConstants.AnchorGet:
+                        new AnchorGet(version, element);
+                        break;
+                    case ElementNamesConstants.HeaderSet:
+                        new HeaderSet(version, element);
+                        break;
+                    case ElementNamesConstants.TableOfContents:
+                        new TableOfContents(version, element);
+                        break;
                 }
             }
+        }
+
+        private void ParseNoTranslate(IEnumerable<HtmlNode> elements)
+        {
+            if (elements == null)
+                return;
+
+            foreach (var element in elements)
+                HtmlParser.ReplaceNode(element, MarkdownToHtml(element.InnerHtml.Trim()));
+        }
+
+        private void ParseCustomTranslation(IEnumerable<HtmlNode> elements, Version version)
+        {
+            if (elements == null)
+                return;
+
+            foreach (var element in elements)
+            {
+                if (version == GetDefaultVersion())
+                {
+                    var original = element.Element(ElementNamesConstants.CustomTranslationDefault);
+                    HtmlParser.ReplaceNode(element, original.InnerHtml.Trim());
+                }
+                else
+                {
+                    foreach (var lang in element.Elements(ElementNamesConstants.CustomTranslationLanguage))
+                    {
+                        if (lang.Attributes["name"].Value == version.Language.Name)
+                        {
+                            HtmlParser.ReplaceNode(element, lang.InnerHtml.Trim());
+                            break;
+                        }
+                    }
+                }
+            }
+        }
+
+        public void ProcessElements()
+        {
+            foreach (var version in Versions)
+            {
+                foreach (var node in version.Nodes)
+                    node.Process();
+
+                version.Content = HtmlToMarkdown(version.XContent.DocumentNode.OuterHtml);
+            }
+        }
+
+        private string HtmlToMarkdown(string html)
+        {
+            var converter = new Converter();
+            return converter.Convert(html);
+        }
+
+        private string MarkdownToHtml(string markdown)
+        {
+            return Markdown.ToHtml(markdown);
+        }
+
+        private string TranslateHtml(string html, string toLang)
+        {   
+            var fromLang = GetDefaultVersion().Language.Name;
+            if (fromLang != toLang)
+                return Translator.Translate(html, fromLang, toLang);
+            return html;
         }
 
         public Version GetDefaultVersion()
@@ -166,7 +189,7 @@ namespace MarkdownMerge.Xml
         public void Save()
         {
             foreach (var version in Versions)
-                FileHelper.SaveContentToFile(version.GetMarkdown(), version.Language.Output);
+                FileHelper.SaveContentToFile(version.Content, version.Language.Output);
         }
     }
 }

@@ -310,13 +310,12 @@
     <Compile Include="Markdig\Syntax\SourceSpan.cs" />
     <Compile Include="Markdig\Syntax\ThematicBreakBlock.cs" />
     <Compile Include="Xml\ContentElements\ElementNamesConstants.cs" />
+    <Compile Include="Xml\ContentElements\HeaderSet.cs" />
+    <Compile Include="Xml\ContentElements\IAnchor.cs" />
     <Compile Include="Xml\ContentElements\NodeBase.cs" />
-    <Compile Include="Xml\ContentElements\Unknown.cs" />
-    <Compile Include="Xml\ContentElements\TextPlain.cs" />
     <Compile Include="Xml\ContentElements\AnchorGet.cs" />
     <Compile Include="Xml\ContentElements\AnchorSet.cs" />
     <Compile Include="Xml\ContentElements\TableOfContents.cs" />
-    <Compile Include="Xml\ContentElements\HeaderSet.cs" />
     <Compile Include="Xml\Documentation.cs" />
     <Compile Include="Xml\Extensions\XExtensions.cs" />
     <Compile Include="Xml\Language.cs" />

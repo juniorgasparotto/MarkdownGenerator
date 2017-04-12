@@ -23,10 +23,10 @@ namespace MarkdownMerge.Commands
         {
             this.HelpText = "Merge markdown files; Generate automatic table of contents; Generate anchor reference;";
 
-            HtmlNode.ElementsFlags["header-set"] = HtmlElementFlag.Empty;
-            HtmlNode.ElementsFlags["header-get"] = HtmlElementFlag.Empty;
-            HtmlNode.ElementsFlags["anchor-get"] = HtmlElementFlag.Empty;
-            HtmlNode.ElementsFlags["anchor-set"] = HtmlElementFlag.Empty;
+            //HtmlNode.ElementsFlags["header-set"] = HtmlElementFlag.Empty;
+            //HtmlNode.ElementsFlags["header-get"] = HtmlElementFlag.Empty;
+            //HtmlNode.ElementsFlags["anchor-get"] = HtmlElementFlag.Empty | HtmlElementFlag.Closed;
+            HtmlNode.ElementsFlags["a"] = HtmlElementFlag.Empty | HtmlElementFlag.Closed | HtmlElementFlag.CanOverlap;
         }
 
         //public string Main(
@@ -75,48 +75,54 @@ namespace MarkdownMerge.Commands
         //    return content;
         //}
 
-        public void ConvertMdFileToHtml(string baseDir)
+        public void TestConvertMdFile(string filePath)
         {
-            //var path2 = @"D:\Junior\Projetos\SysCommand\doc\pt-br\getting-start\specifying-commands.md";
-            //var str = FileHelper.GetContentFromFile(path2);
-            //var fileBaseDir = Path.GetDirectoryName(path2).Replace("pt-br", "pt-br2");
-            //var fileName = Path.GetFileNameWithoutExtension(path2);
-            //var htmlFile = Path.Combine(fileBaseDir, fileName + ".md");
-            //var html = Markdown.ToHtml(str);
-            //var converter = new Converter();
-            //string result = converter.Convert(html);
-            //File.WriteAllText(htmlFile, result, Encoding.UTF8);
-            //return;
-            //var file = @"D:\Junior\Projetos\GITHUB.COM\juniorgasparotto\SysCommand\doc\pt-br\input\support-types.html";
-            //var fileTraduzido = @"D:\Junior\Projetos\GITHUB.COM\juniorgasparotto\SysCommand\doc\pt-br\input\support-types-traduzido.html";
-            //var fileMk = @"D:\Junior\Projetos\GITHUB.COM\juniorgasparotto\SysCommand\doc\pt-br\input\support-types-markdown.html";
-            ////var html2 = Translation.Translator.Translate(File.ReadAllText(file), "pt-br", "en-us");
-            //var html2 = File.ReadAllText(file);
-            //FileHelper.SaveContentToFile(html2, fileTraduzido);
-            //var converter2 = new Converter();
-            //var d = converter2.Convert(html2);
-            //FileHelper.SaveContentToFile(d, fileMk);
-            //return;
-            DirectoryHelper.FindFiles(baseDir, path =>
+            var path = filePath;
+            var str = FileHelper.GetContentFromFile(path);
+            //var fileBaseDir = Path.GetDirectoryName(path).Replace("pt-br", "pt-br2");
+            var fileBaseDir = Path.GetDirectoryName(path);
+            var fileName = Path.GetFileNameWithoutExtension(path);
+            var htmlFile = Path.Combine(fileBaseDir, fileName + ".test.md");
+            var html = Markdown.ToHtml(str);
+            var converter = new Converter();
+            string result = converter.Convert(html);
+            FileHelper.SaveContentToFile(result, htmlFile);
+        }
+
+        public void TestConvertMdFolder(string baseDir, string baseDirOutput)
+        {
+            if (baseDir != baseDirOutput)
             {
-                var str = FileHelper.GetContentFromFile(path);
-                var fileBaseDir = Path.GetDirectoryName(path).Replace("pt-br", "pt-br2");
-                var fileName = Path.GetFileNameWithoutExtension(path);
-                var htmlFile = Path.Combine(fileBaseDir, fileName + ".md");
-                var html = Markdown.ToHtml(str);
-                var converter = new Converter();
-                string result = converter.Convert(html);
-                File.WriteAllText(htmlFile, result, Encoding.UTF8);
-            }, "*.md");
+                DirectoryHelper.FindFiles(baseDir, path =>
+                {
+                    var str = FileHelper.GetContentFromFile(path);
+                    //var fileBaseDir = Path.GetDirectoryName(path).Replace("pt-br", "pt-br2");
+                    var fileBaseDir = baseDirOutput;
+                    var fileName = Path.GetFileNameWithoutExtension(path);
+                    var htmlFile = Path.Combine(fileBaseDir, fileName + ".md");
+                    var html = Markdown.ToHtml(str);
+                    var converter = new Converter();
+                    string result = converter.Convert(html);
+                    FileHelper.SaveContentToFile(result, htmlFile);
+                }, "*.md");
+            }
         }
 
         public void Main(
-            [Argument(LongName = "config", ShortName = 'c', Help = "Config file")]
-            string config = "Sample/Sample.xml"
+            [Argument(Help = "Base directory")]
+            string baseDir = @"D:\Junior\Projetos\GITHUB.COM\juniorgasparotto\SysCommand",
+            [Argument(Help = "Index file")]
+            string indexFile = @"documentation\.generator\index.xml"
         )
         {
+            baseDir = null;
+            indexFile = "Sample/Sample.xml";
+
+            if (baseDir != null)
+                Directory.SetCurrentDirectory(baseDir);
+
             //App.Console.Write(Translation.Translator.Translate(config, "pt-br", "en-us"));
-            var doc = new Documentation(config);
+            var doc = new Documentation(indexFile);
             doc.Save();
         }
     }

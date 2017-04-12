@@ -1,4 +1,6 @@
-﻿using MarkdownMerge.Helpers;
+﻿using Html2Markdown.Replacement;
+using HtmlAgilityPack;
+using MarkdownMerge.Helpers;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,30 +14,36 @@ namespace MarkdownMerge.Xml.Content
         public string Name { get; private set; }
         public string CustomText { get; private set; }
 
-        public AnchorGet(Version version, XElement element, bool translated)
-            : base(version, element, translated)
+        public AnchorGet(Version version, HtmlNode element)
+            : base(version, element)
         {
-            this.Name = element.Attribute("name").Value;
-            this.CustomText = element.Value;
+            this.Name = element.Attributes["name"].Value;
+            this.CustomText = element.InnerHtml;
         }
 
+        public override void Process()
+        {
+            HtmlParser.ReplaceNode(Node, ToString());
+        }
 
         public override string ToString()
         {
             // recupera apenas as versoes da mesma lingua em outras páginas
             var allPageVersion = Version.Page.Documentation.GetVersionsFromLanguage(Version.Language);
-            var anchors = allPageVersion.SelectMany(f => f.Nodes).OfType<AnchorSet>();
+            var anchors = allPageVersion.SelectMany(f => f.Nodes).OfType<IAnchor>();
 
             var anchor = anchors.FirstOrDefault(f => f.Name == Name);
             if (anchor != null)
             {
                 var text = string.IsNullOrWhiteSpace(CustomText) ? anchor.Text : CustomText;
-                return MarkdownHelper.GetLinkFromAnchor(GetTranslate(text), anchor.GetAnchorLink());
+                return MarkdownHelper.GetLinkFromAnchor(text, anchor.GetAnchorLink());
             }
             else
             {
                 throw new Exception($"The anchor '{Name}' doesn't exist for language version {Version.Language.Name}: {Node.ToString()}");
             }
         }
+
+       
     }
 }

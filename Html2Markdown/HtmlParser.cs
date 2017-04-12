@@ -190,16 +190,20 @@ namespace Html2Markdown.Replacement
 					var linkText = node.InnerHtml;
 					var href = node.Attributes.GetAttributeOrEmpty("href");
 					var title = node.Attributes.GetAttributeOrEmpty("title");
+					var content = node.InnerHtml;
 
-					var markdown = "";
+                    if (!string.IsNullOrWhiteSpace(content))
+                    {
+                        var markdown = "";
 
-					if (!IsEmptyLink(linkText, href))
-					{
-						markdown = string.Format(@"[{0}]({1}{2})", linkText, href,
-												 (title.Length > 0) ? string.Format(" \"{0}\"", title) : "");
-					}
+                        if (!IsEmptyLink(linkText, href))
+                        {
+                            markdown = string.Format(@"[{0}]({1}{2})", linkText, href,
+                                                     (title.Length > 0) ? string.Format(" \"{0}\"", title) : "");
+                        }
 
-					ReplaceNode(node, markdown);
+                        ReplaceNode(node, markdown);
+                    }
 				});
 
 			return doc.DocumentNode.OuterHtml;
@@ -230,6 +234,7 @@ namespace Html2Markdown.Replacement
                 }
                 else
                 {
+                    code = code == "" ? " " : code;
                     markdown = $"`{code}`";
                 }
 
@@ -295,7 +300,7 @@ namespace Html2Markdown.Replacement
 			return length == 0;
 		}
 
-		private static HtmlDocument GetHtmlDocument(string html)
+		public static HtmlDocument GetHtmlDocument(string html)
 		{
 			var doc = new HtmlDocument();
             doc.OptionWriteEmptyNodes = true;
@@ -303,12 +308,12 @@ namespace Html2Markdown.Replacement
             return doc;
 		}
 
-		private static void ReplaceNode(HtmlNode node, string markdown)
+		public static void ReplaceNode(HtmlNode node, string newValue)
 		{
-            var doc = GetHtmlDocument(markdown);
+            var doc = GetHtmlDocument(newValue);
             var markdownNode = doc.DocumentNode; //HtmlNode.CreateNode(markdown);
 
-            if (string.IsNullOrEmpty(markdown))
+            if (string.IsNullOrEmpty(newValue))
 			{
 				node.ParentNode.RemoveChild(node);
 			}

@@ -1,17 +1,19 @@
-﻿using MarkdownMerge.Helpers;
+﻿using Html2Markdown.Replacement;
+using HtmlAgilityPack;
+using MarkdownMerge.Helpers;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using System.Xml.Linq;
 
 namespace MarkdownMerge.Xml.Content
 {
     public class TableOfContents : NodeBase
     {
-        public TableOfContents(Version version, XElement element, bool translated) 
-            : base(version, element, translated)
+        public TableOfContents(Version version, HtmlNode element) 
+            : base(version, element)
         {
+            
         }
 
         public override string ToString()
@@ -29,11 +31,16 @@ namespace MarkdownMerge.Xml.Content
                     strBuilder.Append(new String(' ', (header.Heading - 1) * 2));
 
                 strBuilder.Append("*");
-                strBuilder.Append(" " + MarkdownHelper.GetLinkFromAnchor(GetTranslate(header.Text), header.GetAnchorLink()));
+                strBuilder.Append(" " + MarkdownHelper.GetLinkFromAnchor(header.Text, header.GetAnchorLink()));
                 if (header != headers.LastOrDefault())
                     strBuilder.AppendLine();
             }
             return strBuilder.ToString();
+        }
+
+        public override void Process()
+        {
+            HtmlParser.ReplaceNode(Node, ToString());
         }
     }
 }

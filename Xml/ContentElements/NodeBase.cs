@@ -1,4 +1,5 @@
-﻿using MarkdownMerge.Translation;
+﻿using HtmlAgilityPack;
+using MarkdownMerge.Translation;
 using System.Collections.Generic;
 using System.Linq;
 using System.Xml.Linq;
@@ -8,8 +9,7 @@ namespace MarkdownMerge.Xml.Content
     public abstract class NodeBase
     {
         public Version Version { get; private set; }
-        public XNode Node { get; private set; }
-        public bool Translated { get; private set; }
+        public HtmlNode Node { get; private set; }
 
         public NodeBase Before
         {
@@ -27,12 +27,11 @@ namespace MarkdownMerge.Xml.Content
             }
         }
 
-        public NodeBase(Version version, XNode xnode, bool translated)
+        public NodeBase(Version version, HtmlNode node)
         {
             this.Version = version;
             this.Version.Nodes.Add(this);
-            this.Node = xnode;
-            this.Translated = translated;
+            this.Node = node;
         }
 
         public T GetBefore<T>() where T : NodeBase
@@ -51,17 +50,16 @@ namespace MarkdownMerge.Xml.Content
             return null;
         }
 
-        public string GetTranslate(string text)
-        {
-            var fromLang = Version.Page.GetDefaultVersion().Language.Name;
-            var toLang = Version.Language.Name;
+        //public string GetTranslate(string text)
+        //{
+        //    var fromLang = Version.Page.GetDefaultVersion().Language.Name;
+        //    var toLang = Version.Language.Name;
 
-            if (!Translated || fromLang == toLang)
-                return text;
+        //    var textTranslated = Translator.Translate(text, fromLang, toLang);
+        //    return textTranslated;
+        //}
 
-            var textTranslated = Translator.Translate(text, fromLang, toLang);
-            return textTranslated;
-        }
+        public abstract void Process();
 
         public override string ToString()
         {

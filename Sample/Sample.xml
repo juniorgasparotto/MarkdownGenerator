@@ -17,7 +17,7 @@
       <language name="en-us" output="output/doc/documentation.md" />
     </languages>
     <content>
-      <include href="Sample/Page2_Index.md" />
+      <include href="Sample/Page1_Index.md" />
     </content>
   </page>
 </documentation>

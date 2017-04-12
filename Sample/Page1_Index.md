@@ -1,24 +1,61 @@
-﻿<table-of-contents/>
+﻿<table-of-contents />
 
-<h1 name="title1">Titulo 1</h1>
-      
-<unknow-tag
-  attr1="value"
-  attr2="value"
-  attr3="value">
-  Tag que faz parte do documento
-</unknow-tag>
+# Titulo 1 <header-set anchor-name="title1" />
 
-<p>Meu texto em português com uma ancora aqui "<anchor-set name="readme">ancora para **readme**</anchor-set>" e o texto
-continua aqui.</p>
+Meu texto do titulo 1.
 
-<p>Aqui tem o link para a documentação: <anchor-get name="documentation" /></p>
-<p>Aqui tem o link para a documentação com o texto customizado: <anchor-get name="documentation">Texto customizado</anchor-get></p>
-<p>Link para o "titulo 2" da documentação: <anchor-get name="doc-title2" /></p>
-<p>Inclusão de conteúdo externo 1:</p>
-<include href="Sample/Page1.md" />
+_Código em linha:_
 
-<p>Inclusão de conteúdo externo SEM TRADUÇÃO:</p>
-<no-translation>
-  <include href="Sample/Page1_2.md" />
-</no-translation>
+`meu código`
+
+*Código em bloco:*
+
+```csharp
+meu código em bloco
+```
+
+Texto da ancora 6: <anchor-get name="anchor-title6" />
+
+## Titulo 2 <header-set anchor-name="title2" />
+
+Meu texto do titulo 2
+
+Texto do cabeçalho 1: <anchor-get name="title1">ancora customizada</anchor-get>
+
+### Titulo 3 <header-set anchor-name="title3" />
+
+<no-translate>
+  # Meu texto que não pode ser traduzido!
+
+  `meu código`
+  
+  * Ancora customizado por lingua: <anchor-get name="doc-title2"/>
+  * Ancora customizado por lingua com texto customizado: <anchor-get name="doc-title2">texto customizado</anchor-get>
+</no-translate>
+
+#### Titulo 4 <header-set anchor-name="title4" />
+
+Meu texto do titulo 4
+
+<custom-translation>
+  <default>
+    <h1>Aqui tem um texto em Portugues <header-set anchor-name="doc-title2"/></h1>
+    * Código `my code`
+  </default>
+
+  <language name="en-us">
+    <h1>Here is a custom text in English! <header-set anchor-name="doc-title2"/></h1>
+  </language>
+
+  <language name="fr">
+    # Franch <header-set anchor-name="doc-title2"/>
+  </language>
+</custom-translation>
+
+## Titulo 2.2 <header-set anchor-name="title5" />
+
+Meu texto do titulo 2.2
+
+### Titulo 2.3 <header-set anchor-name="title6" />
+
+Meu texto do titulo 2.3 <anchor-set name="anchor-title6">e uma ancora</anchor-set>
