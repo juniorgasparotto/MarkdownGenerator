@@ -1,13 +1,13 @@
-﻿using MarkdownMerge.Xml.Tags;
+﻿using MarkdownGenerator.Xml.Tags;
 using System.Collections.Generic;
 using System.Linq;
 using System.Xml.Linq;
 using SysCommand.ConsoleApp.Helpers;
-using MarkdownMerge.Xml.Extensions;
+using MarkdownGenerator.Xml.Extensions;
 using HtmlAgilityPack;
 using Html2Markdown.Replacement;
 
-namespace MarkdownMerge.Xml
+namespace MarkdownGenerator.Xml
 {
     public partial class Page
     {

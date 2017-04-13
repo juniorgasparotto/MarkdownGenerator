@@ -3,7 +3,7 @@ using System.Net;
 using System.Net.Http;
 using System.Threading.Tasks;
 
-namespace MarkdownMerge.Translation
+namespace MarkdownGenerator.Translation
 {
     /// <summary>
     /// Client to call Cognitive Services Azure Auth Token service in order to get an access token.

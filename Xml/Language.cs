@@ -1,4 +1,4 @@
-﻿namespace MarkdownMerge.Xml
+﻿namespace MarkdownGenerator.Xml
 {
     public class Language
     {

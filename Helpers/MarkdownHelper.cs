@@ -1,10 +1,10 @@
-﻿using MarkdownMerge.Xml.Tags;
+﻿using MarkdownGenerator.Xml.Tags;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace MarkdownMerge.Helpers
+namespace MarkdownGenerator.Helpers
 {
     public static class MarkdownHelper
     {

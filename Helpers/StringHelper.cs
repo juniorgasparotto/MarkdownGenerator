@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Linq;
 
-namespace MarkdownMerge.Helpers
+namespace MarkdownGenerator.Helpers
 {
     public static class StringHelper
     {

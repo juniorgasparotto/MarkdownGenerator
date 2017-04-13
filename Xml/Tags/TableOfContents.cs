@@ -1,12 +1,12 @@
 ﻿using Html2Markdown.Replacement;
 using HtmlAgilityPack;
-using MarkdownMerge.Helpers;
+using MarkdownGenerator.Helpers;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace MarkdownMerge.Xml.Tags
+namespace MarkdownGenerator.Xml.Tags
 {
     public class TableOfContents : NodeBase
     {

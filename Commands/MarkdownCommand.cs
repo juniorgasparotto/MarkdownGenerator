@@ -1,10 +1,10 @@
 ﻿using SysCommand.ConsoleApp;
 using SysCommand.Mapping;
-using MarkdownMerge.Xml;
+using MarkdownGenerator.Xml;
 using System.IO;
 using HtmlAgilityPack;
 
-namespace MarkdownMerge.Commands
+namespace MarkdownGenerator.Commands
 {
     public partial class MarkdownCommand : Command
     {

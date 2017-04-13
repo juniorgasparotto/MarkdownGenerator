@@ -327,13 +327,6 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Compile>
-    <Compile Include="_old\Compiler.cs" />
-    <Compile Include="_old\XmlMethod.cs" />
-    <Compile Include="_old\XmlMethodPart.cs" />
-    <Compile Include="_old\RealStringPart.cs" />
-    <Compile Include="_old\Anchor.cs" />
-    <Compile Include="_old\StringPart.cs" />
-    <Compile Include="_old\Header.cs" />
     <Compile Include="Commands\MarkdownCommand.cs" />
     <Compile Include="Translator\Translator.cs" />
     <Compile Include="Xml\Extensions\XInclude.cs" />

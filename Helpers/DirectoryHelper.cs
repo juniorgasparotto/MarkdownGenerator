@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MarkdownMerge.Helpers
+namespace MarkdownGenerator.Helpers
 {
     public static class DirectoryHelper
     {

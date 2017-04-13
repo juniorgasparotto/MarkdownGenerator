@@ -1,11 +1,11 @@
 ﻿using SysCommand.ConsoleApp;
 using SysCommand.ConsoleApp.Helpers;
-using MarkdownMerge.Helpers;
+using MarkdownGenerator.Helpers;
 using System.IO;
 using Markdig;
 using Html2Markdown;
 
-namespace MarkdownMerge.Commands
+namespace MarkdownGenerator.Commands
 {
     public partial class TestCommand : Command
     {

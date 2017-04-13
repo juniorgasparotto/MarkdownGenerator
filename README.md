@@ -1,1 +1,1 @@
-# MarkdownMerge
+# MarkdownGenerator

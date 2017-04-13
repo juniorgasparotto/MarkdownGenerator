@@ -1,10 +1,9 @@
-﻿using MarkdownMerge.Xml.Extensions;
+﻿using MarkdownGenerator.Xml.Extensions;
 using System.Collections.Generic;
 using System.Linq;
 using System.Xml.Linq;
-using System;
 
-namespace MarkdownMerge.Xml
+namespace MarkdownGenerator.Xml
 {
     public class Documentation
     {

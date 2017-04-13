@@ -3,7 +3,7 @@ using SysCommand.ConsoleApp.Commands;
 using SysCommand.ConsoleApp.Helpers;
 using SysCommand.ConsoleApp.Loader;
 
-namespace MarkdownMerge
+namespace MarkdownGenerator
 {
     class Program
     {

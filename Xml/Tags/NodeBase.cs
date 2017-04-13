@@ -1,10 +1,10 @@
 ﻿using HtmlAgilityPack;
-using MarkdownMerge.Translation;
+using MarkdownGenerator.Translation;
 using System.Collections.Generic;
 using System.Linq;
 using System.Xml.Linq;
 
-namespace MarkdownMerge.Xml.Tags
+namespace MarkdownGenerator.Xml.Tags
 {
     public abstract class NodeBase
     {

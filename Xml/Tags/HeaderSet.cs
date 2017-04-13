@@ -1,10 +1,10 @@
 ﻿using Html2Markdown.Replacement;
 using HtmlAgilityPack;
-using MarkdownMerge.Helpers;
+using MarkdownGenerator.Helpers;
 using System;
 using System.Collections.Generic;
 
-namespace MarkdownMerge.Xml.Tags
+namespace MarkdownGenerator.Xml.Tags
 {
     public class HeaderSet : NodeBase, IAnchor
     {

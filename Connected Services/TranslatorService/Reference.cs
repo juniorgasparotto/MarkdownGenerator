@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace MarkdownMerge.TranslatorService {
+namespace MarkdownGenerator.TranslatorService {
     using System.Runtime.Serialization;
     using System;
     
@@ -218,7 +218,7 @@ namespace MarkdownMerge.TranslatorService {
         private string StateField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private MarkdownMerge.TranslatorService.TranslationMatch[] TranslationsField;
+        private MarkdownGenerator.TranslatorService.TranslationMatch[] TranslationsField;
         
         [global::System.ComponentModel.BrowsableAttribute(false)]
         public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
@@ -257,7 +257,7 @@ namespace MarkdownMerge.TranslatorService {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false)]
-        public MarkdownMerge.TranslatorService.TranslationMatch[] Translations {
+        public MarkdownGenerator.TranslatorService.TranslationMatch[] Translations {
             get {
                 return this.TranslationsField;
             }
@@ -814,10 +814,10 @@ namespace MarkdownMerge.TranslatorService {
         System.Threading.Tasks.Task<string[]> GetLanguagesForTranslateAsync(string appId);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://api.microsofttranslator.com/V2/LanguageService/GetTranslations", ReplyAction="http://api.microsofttranslator.com/V2/LanguageService/GetTranslationsResponse")]
-        MarkdownMerge.TranslatorService.GetTranslationsResponse GetTranslations(string appId, string text, string from, string to, int maxTranslations, MarkdownMerge.TranslatorService.TranslateOptions options);
+        MarkdownGenerator.TranslatorService.GetTranslationsResponse GetTranslations(string appId, string text, string from, string to, int maxTranslations, MarkdownGenerator.TranslatorService.TranslateOptions options);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://api.microsofttranslator.com/V2/LanguageService/GetTranslations", ReplyAction="http://api.microsofttranslator.com/V2/LanguageService/GetTranslationsResponse")]
-        System.Threading.Tasks.Task<MarkdownMerge.TranslatorService.GetTranslationsResponse> GetTranslationsAsync(string appId, string text, string from, string to, int maxTranslations, MarkdownMerge.TranslatorService.TranslateOptions options);
+        System.Threading.Tasks.Task<MarkdownGenerator.TranslatorService.GetTranslationsResponse> GetTranslationsAsync(string appId, string text, string from, string to, int maxTranslations, MarkdownGenerator.TranslatorService.TranslateOptions options);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://api.microsofttranslator.com/V2/LanguageService/Translate", ReplyAction="http://api.microsofttranslator.com/V2/LanguageService/TranslateResponse")]
         string Translate(string appId, string text, string from, string to, string contentType, string category, string reservedFlags);
@@ -827,19 +827,19 @@ namespace MarkdownMerge.TranslatorService {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://api.microsofttranslator.com/V2/LanguageService/AddTranslationArray", ReplyAction="http://api.microsofttranslator.com/V2/LanguageService/AddTranslationArrayResponse" +
             "")]
-        void AddTranslationArray(string appId, MarkdownMerge.TranslatorService.Translation[] translations, string from, string to, MarkdownMerge.TranslatorService.TranslateOptions options);
+        void AddTranslationArray(string appId, MarkdownGenerator.TranslatorService.Translation[] translations, string from, string to, MarkdownGenerator.TranslatorService.TranslateOptions options);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://api.microsofttranslator.com/V2/LanguageService/AddTranslationArray", ReplyAction="http://api.microsofttranslator.com/V2/LanguageService/AddTranslationArrayResponse" +
             "")]
-        System.Threading.Tasks.Task AddTranslationArrayAsync(string appId, MarkdownMerge.TranslatorService.Translation[] translations, string from, string to, MarkdownMerge.TranslatorService.TranslateOptions options);
+        System.Threading.Tasks.Task AddTranslationArrayAsync(string appId, MarkdownGenerator.TranslatorService.Translation[] translations, string from, string to, MarkdownGenerator.TranslatorService.TranslateOptions options);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://api.microsofttranslator.com/V2/LanguageService/GetTranslationsArray", ReplyAction="http://api.microsofttranslator.com/V2/LanguageService/GetTranslationsArrayRespons" +
             "e")]
-        MarkdownMerge.TranslatorService.GetTranslationsResponse[] GetTranslationsArray(string appId, string[] texts, string from, string to, int maxTranslations, MarkdownMerge.TranslatorService.TranslateOptions options);
+        MarkdownGenerator.TranslatorService.GetTranslationsResponse[] GetTranslationsArray(string appId, string[] texts, string from, string to, int maxTranslations, MarkdownGenerator.TranslatorService.TranslateOptions options);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://api.microsofttranslator.com/V2/LanguageService/GetTranslationsArray", ReplyAction="http://api.microsofttranslator.com/V2/LanguageService/GetTranslationsArrayRespons" +
             "e")]
-        System.Threading.Tasks.Task<MarkdownMerge.TranslatorService.GetTranslationsResponse[]> GetTranslationsArrayAsync(string appId, string[] texts, string from, string to, int maxTranslations, MarkdownMerge.TranslatorService.TranslateOptions options);
+        System.Threading.Tasks.Task<MarkdownGenerator.TranslatorService.GetTranslationsResponse[]> GetTranslationsArrayAsync(string appId, string[] texts, string from, string to, int maxTranslations, MarkdownGenerator.TranslatorService.TranslateOptions options);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://api.microsofttranslator.com/V2/LanguageService/Speak", ReplyAction="http://api.microsofttranslator.com/V2/LanguageService/SpeakResponse")]
         string Speak(string appId, string text, string language, string format, string options);
@@ -848,25 +848,25 @@ namespace MarkdownMerge.TranslatorService {
         System.Threading.Tasks.Task<string> SpeakAsync(string appId, string text, string language, string format, string options);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://api.microsofttranslator.com/V2/LanguageService/TranslateArray", ReplyAction="http://api.microsofttranslator.com/V2/LanguageService/TranslateArrayResponse")]
-        MarkdownMerge.TranslatorService.TranslateArrayResponse[] TranslateArray(string appId, string[] texts, string from, string to, MarkdownMerge.TranslatorService.TranslateOptions options);
+        MarkdownGenerator.TranslatorService.TranslateArrayResponse[] TranslateArray(string appId, string[] texts, string from, string to, MarkdownGenerator.TranslatorService.TranslateOptions options);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://api.microsofttranslator.com/V2/LanguageService/TranslateArray", ReplyAction="http://api.microsofttranslator.com/V2/LanguageService/TranslateArrayResponse")]
-        System.Threading.Tasks.Task<MarkdownMerge.TranslatorService.TranslateArrayResponse[]> TranslateArrayAsync(string appId, string[] texts, string from, string to, MarkdownMerge.TranslatorService.TranslateOptions options);
+        System.Threading.Tasks.Task<MarkdownGenerator.TranslatorService.TranslateArrayResponse[]> TranslateArrayAsync(string appId, string[] texts, string from, string to, MarkdownGenerator.TranslatorService.TranslateOptions options);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://api.microsofttranslator.com/V2/LanguageService/TranslateArray2", ReplyAction="http://api.microsofttranslator.com/V2/LanguageService/TranslateArray2Response")]
-        MarkdownMerge.TranslatorService.TranslateArray2Response[] TranslateArray2(string appId, string[] texts, string from, string to, MarkdownMerge.TranslatorService.TranslateOptions options);
+        MarkdownGenerator.TranslatorService.TranslateArray2Response[] TranslateArray2(string appId, string[] texts, string from, string to, MarkdownGenerator.TranslatorService.TranslateOptions options);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://api.microsofttranslator.com/V2/LanguageService/TranslateArray2", ReplyAction="http://api.microsofttranslator.com/V2/LanguageService/TranslateArray2Response")]
-        System.Threading.Tasks.Task<MarkdownMerge.TranslatorService.TranslateArray2Response[]> TranslateArray2Async(string appId, string[] texts, string from, string to, MarkdownMerge.TranslatorService.TranslateOptions options);
+        System.Threading.Tasks.Task<MarkdownGenerator.TranslatorService.TranslateArray2Response[]> TranslateArray2Async(string appId, string[] texts, string from, string to, MarkdownGenerator.TranslatorService.TranslateOptions options);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    public interface LanguageServiceChannel : MarkdownMerge.TranslatorService.LanguageService, System.ServiceModel.IClientChannel {
+    public interface LanguageServiceChannel : MarkdownGenerator.TranslatorService.LanguageService, System.ServiceModel.IClientChannel {
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    public partial class LanguageServiceClient : System.ServiceModel.ClientBase<MarkdownMerge.TranslatorService.LanguageService>, MarkdownMerge.TranslatorService.LanguageService {
+    public partial class LanguageServiceClient : System.ServiceModel.ClientBase<MarkdownGenerator.TranslatorService.LanguageService>, MarkdownGenerator.TranslatorService.LanguageService {
         
         public LanguageServiceClient() {
         }
@@ -951,11 +951,11 @@ namespace MarkdownMerge.TranslatorService {
             return base.Channel.GetLanguagesForTranslateAsync(appId);
         }
         
-        public MarkdownMerge.TranslatorService.GetTranslationsResponse GetTranslations(string appId, string text, string from, string to, int maxTranslations, MarkdownMerge.TranslatorService.TranslateOptions options) {
+        public MarkdownGenerator.TranslatorService.GetTranslationsResponse GetTranslations(string appId, string text, string from, string to, int maxTranslations, MarkdownGenerator.TranslatorService.TranslateOptions options) {
             return base.Channel.GetTranslations(appId, text, from, to, maxTranslations, options);
         }
         
-        public System.Threading.Tasks.Task<MarkdownMerge.TranslatorService.GetTranslationsResponse> GetTranslationsAsync(string appId, string text, string from, string to, int maxTranslations, MarkdownMerge.TranslatorService.TranslateOptions options) {
+        public System.Threading.Tasks.Task<MarkdownGenerator.TranslatorService.GetTranslationsResponse> GetTranslationsAsync(string appId, string text, string from, string to, int maxTranslations, MarkdownGenerator.TranslatorService.TranslateOptions options) {
             return base.Channel.GetTranslationsAsync(appId, text, from, to, maxTranslations, options);
         }
         
@@ -967,19 +967,19 @@ namespace MarkdownMerge.TranslatorService {
             return base.Channel.TranslateAsync(appId, text, from, to, contentType, category, reservedFlags);
         }
         
-        public void AddTranslationArray(string appId, MarkdownMerge.TranslatorService.Translation[] translations, string from, string to, MarkdownMerge.TranslatorService.TranslateOptions options) {
+        public void AddTranslationArray(string appId, MarkdownGenerator.TranslatorService.Translation[] translations, string from, string to, MarkdownGenerator.TranslatorService.TranslateOptions options) {
             base.Channel.AddTranslationArray(appId, translations, from, to, options);
         }
         
-        public System.Threading.Tasks.Task AddTranslationArrayAsync(string appId, MarkdownMerge.TranslatorService.Translation[] translations, string from, string to, MarkdownMerge.TranslatorService.TranslateOptions options) {
+        public System.Threading.Tasks.Task AddTranslationArrayAsync(string appId, MarkdownGenerator.TranslatorService.Translation[] translations, string from, string to, MarkdownGenerator.TranslatorService.TranslateOptions options) {
             return base.Channel.AddTranslationArrayAsync(appId, translations, from, to, options);
         }
         
-        public MarkdownMerge.TranslatorService.GetTranslationsResponse[] GetTranslationsArray(string appId, string[] texts, string from, string to, int maxTranslations, MarkdownMerge.TranslatorService.TranslateOptions options) {
+        public MarkdownGenerator.TranslatorService.GetTranslationsResponse[] GetTranslationsArray(string appId, string[] texts, string from, string to, int maxTranslations, MarkdownGenerator.TranslatorService.TranslateOptions options) {
             return base.Channel.GetTranslationsArray(appId, texts, from, to, maxTranslations, options);
         }
         
-        public System.Threading.Tasks.Task<MarkdownMerge.TranslatorService.GetTranslationsResponse[]> GetTranslationsArrayAsync(string appId, string[] texts, string from, string to, int maxTranslations, MarkdownMerge.TranslatorService.TranslateOptions options) {
+        public System.Threading.Tasks.Task<MarkdownGenerator.TranslatorService.GetTranslationsResponse[]> GetTranslationsArrayAsync(string appId, string[] texts, string from, string to, int maxTranslations, MarkdownGenerator.TranslatorService.TranslateOptions options) {
             return base.Channel.GetTranslationsArrayAsync(appId, texts, from, to, maxTranslations, options);
         }
         
@@ -991,19 +991,19 @@ namespace MarkdownMerge.TranslatorService {
             return base.Channel.SpeakAsync(appId, text, language, format, options);
         }
         
-        public MarkdownMerge.TranslatorService.TranslateArrayResponse[] TranslateArray(string appId, string[] texts, string from, string to, MarkdownMerge.TranslatorService.TranslateOptions options) {
+        public MarkdownGenerator.TranslatorService.TranslateArrayResponse[] TranslateArray(string appId, string[] texts, string from, string to, MarkdownGenerator.TranslatorService.TranslateOptions options) {
             return base.Channel.TranslateArray(appId, texts, from, to, options);
         }
         
-        public System.Threading.Tasks.Task<MarkdownMerge.TranslatorService.TranslateArrayResponse[]> TranslateArrayAsync(string appId, string[] texts, string from, string to, MarkdownMerge.TranslatorService.TranslateOptions options) {
+        public System.Threading.Tasks.Task<MarkdownGenerator.TranslatorService.TranslateArrayResponse[]> TranslateArrayAsync(string appId, string[] texts, string from, string to, MarkdownGenerator.TranslatorService.TranslateOptions options) {
             return base.Channel.TranslateArrayAsync(appId, texts, from, to, options);
         }
         
-        public MarkdownMerge.TranslatorService.TranslateArray2Response[] TranslateArray2(string appId, string[] texts, string from, string to, MarkdownMerge.TranslatorService.TranslateOptions options) {
+        public MarkdownGenerator.TranslatorService.TranslateArray2Response[] TranslateArray2(string appId, string[] texts, string from, string to, MarkdownGenerator.TranslatorService.TranslateOptions options) {
             return base.Channel.TranslateArray2(appId, texts, from, to, options);
         }
         
-        public System.Threading.Tasks.Task<MarkdownMerge.TranslatorService.TranslateArray2Response[]> TranslateArray2Async(string appId, string[] texts, string from, string to, MarkdownMerge.TranslatorService.TranslateOptions options) {
+        public System.Threading.Tasks.Task<MarkdownGenerator.TranslatorService.TranslateArray2Response[]> TranslateArray2Async(string appId, string[] texts, string from, string to, MarkdownGenerator.TranslatorService.TranslateOptions options) {
             return base.Channel.TranslateArray2Async(appId, texts, from, to, options);
         }
     }

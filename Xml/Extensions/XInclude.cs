@@ -3,7 +3,7 @@ using System.IO;
 using System.Linq;
 using System.Xml.Linq;
 
-namespace MarkdownMerge.Xml.Extensions
+namespace MarkdownGenerator.Xml.Extensions
 {
     /// <summary>
     /// Linq to XML XInclude extentions

@@ -1,4 +1,4 @@
-﻿using MarkdownMerge.Helpers;
+﻿using MarkdownGenerator.Helpers;
 using System.Xml.Linq;
 using System;
 using System.IO;
@@ -6,7 +6,7 @@ using System.Linq;
 using HtmlAgilityPack;
 using Html2Markdown.Replacement;
 
-namespace MarkdownMerge.Xml.Tags
+namespace MarkdownGenerator.Xml.Tags
 {
     public class AnchorSet : NodeBase, IAnchor
     {

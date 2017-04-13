@@ -1,5 +1,5 @@
-﻿using MarkdownMerge.Translation;
-using MarkdownMerge.Xml.Tags;
+﻿using MarkdownGenerator.Translation;
+using MarkdownGenerator.Xml.Tags;
 using System.Collections.Generic;
 using HtmlAgilityPack;
 using Html2Markdown.Replacement;
@@ -7,9 +7,9 @@ using Html2Markdown;
 using Markdig;
 using System.Linq;
 using System;
-using MarkdownMerge.Helpers;
+using MarkdownGenerator.Helpers;
 
-namespace MarkdownMerge.Xml
+namespace MarkdownGenerator.Xml
 {
     public class Version
     {

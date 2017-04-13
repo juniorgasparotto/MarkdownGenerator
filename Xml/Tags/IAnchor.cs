@@ -1,4 +1,4 @@
-﻿namespace MarkdownMerge.Xml.Tags
+﻿namespace MarkdownGenerator.Xml.Tags
 {
     internal interface IAnchor
     {
