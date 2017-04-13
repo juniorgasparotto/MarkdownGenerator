@@ -13,12 +13,12 @@ namespace MarkdownGenerator.Xml
 
         public Documentation(string xmlConfig)
         {
-            var xml = XDocument.Load(xmlConfig, LoadOptions.None);
+            var xml = XDocument.Load(xmlConfig, LoadOptions.PreserveWhitespace);
 
             foreach (var e in xml.Descendants("content").ToList())
             {
-                var newElements = XElement.Parse(StringHelper.TrimAllLines(e.OuterXml()).Trim());
-                e.ReplaceNodes(newElements);
+                var newElements = XElement.Parse(StringHelper.TrimAllLines(e.OuterXml()).Trim(), LoadOptions.PreserveWhitespace);
+                e.ReplaceNodes(newElements.Nodes());
             }
 
             XInclude.ReplaceXIncludes(xml);
