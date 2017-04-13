@@ -1,7 +1,4 @@
-﻿using SysCommand.ConsoleApp.Helpers;
-using System.IO;
-using System.Linq;
-using System.Xml.Linq;
+﻿using System.Xml.Linq;
 
 namespace MarkdownGenerator.Xml.Extensions
 {
@@ -17,6 +14,12 @@ namespace MarkdownGenerator.Xml.Extensions
                 reader.MoveToContent();
                 return reader.ReadInnerXml();
             }
+        }
+
+        public static void ReplaceContent(this XElement element, string newContent)
+        {
+            var el = XElement.Parse(newContent);
+            element.ReplaceNodes(el);
         }
 
         public static string OuterXml(this XNode node)

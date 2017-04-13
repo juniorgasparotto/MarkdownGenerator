@@ -1,4 +1,5 @@
-﻿using MarkdownGenerator.Xml.Extensions;
+﻿using MarkdownGenerator.Helpers;
+using MarkdownGenerator.Xml.Extensions;
 using System.Collections.Generic;
 using System.Linq;
 using System.Xml.Linq;
@@ -13,6 +14,13 @@ namespace MarkdownGenerator.Xml
         public Documentation(string xmlConfig)
         {
             var xml = XDocument.Load(xmlConfig, LoadOptions.None);
+
+            foreach (var e in xml.Descendants("content").ToList())
+            {
+                var newElements = XElement.Parse(StringHelper.TrimAllLines(e.OuterXml()).Trim());
+                e.ReplaceNodes(newElements);
+            }
+
             XInclude.ReplaceXIncludes(xml);
             var xdoc = xml.Root;
             this.UrlBase = xdoc.Attribute("url-base")?.Value;

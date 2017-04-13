@@ -6,6 +6,10 @@
       <language name="fr" output="output/readme-fr.md" />
     </languages>
     <content>
+      <table-of-contents />
+      
+      Oi!!
+
       <include href="Sample/Content.md" />
     </content>
   </page>

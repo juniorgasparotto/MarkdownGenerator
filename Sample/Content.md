@@ -1,6 +1,4 @@
-﻿<table-of-contents />
-
-# Titulo 1 <header-set anchor-name="title1" />
+﻿# Titulo 1 <header-set anchor-name="title1" />
 
 Meu texto do titulo 1.
 
