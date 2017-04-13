@@ -1,4 +1,4 @@
-﻿using MarkdownMerge.Xml.Content;
+﻿using MarkdownMerge.Xml.Tags;
 using System.Collections.Generic;
 using System.Linq;
 using System.Xml.Linq;
@@ -47,7 +47,7 @@ namespace MarkdownMerge.Xml
         public void Save()
         {
             foreach (var version in Versions)
-                FileHelper.SaveContentToFile(version.ToMarkdown(), version.Language.Output);
+                FileHelper.SaveContentToFile(version.GetMarkdown(), version.Language.Output);
         }
     }
 }

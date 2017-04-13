@@ -6,7 +6,7 @@ using System.Linq;
 using HtmlAgilityPack;
 using Html2Markdown.Replacement;
 
-namespace MarkdownMerge.Xml.Content
+namespace MarkdownMerge.Xml.Tags
 {
     public class AnchorSet : NodeBase, IAnchor
     {
@@ -26,7 +26,7 @@ namespace MarkdownMerge.Xml.Content
             return path + "#" + Name;
         }
 
-        public override void Process()
+        public override void ReplaceToMarkdown()
         {
             HtmlParser.ReplaceNode(Node, ToString());
         }

@@ -1,4 +1,4 @@
-﻿namespace MarkdownMerge.Xml.Content
+﻿namespace MarkdownMerge.Xml.Tags
 {
     public static class ElementNamesConstants
     {

@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Xml.Linq;
 
-namespace MarkdownMerge.Xml.Content
+namespace MarkdownMerge.Xml.Tags
 {
     public abstract class NodeBase
     {
@@ -59,7 +59,7 @@ namespace MarkdownMerge.Xml.Content
         //    return textTranslated;
         //}
 
-        public abstract void Process();
+        public abstract void ReplaceToMarkdown();
 
         public override string ToString()
         {

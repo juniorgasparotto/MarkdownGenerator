@@ -4,7 +4,7 @@ using MarkdownMerge.Helpers;
 using System;
 using System.Collections.Generic;
 
-namespace MarkdownMerge.Xml.Content
+namespace MarkdownMerge.Xml.Tags
 {
     public class HeaderSet : NodeBase, IAnchor
     {
@@ -31,7 +31,7 @@ namespace MarkdownMerge.Xml.Content
             return path + "#" + Name;
         }
 
-        public override void Process()
+        public override void ReplaceToMarkdown()
         {
             Node.ParentNode.InnerHtml = ToString();
             Node.Remove();

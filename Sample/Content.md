@@ -25,10 +25,15 @@ Texto do cabeçalho 1: <anchor-get name="title1">ancora customizada</anchor-get>
 ### Titulo 3 <header-set anchor-name="title3" />
 
 <no-translate>
-  # Meu texto que não pode ser traduzido!
-
+  # Meu texto que não pode ser traduzido! <header-set anchor-name="no-translate"/>
+  ## Sub-titulo <header-set anchor-name="no-translate-sub"/>
+  
   `meu código`
   
+  ### Sub-titulo 1 <header-set anchor-name="no-translate-sub1"/>
+  
+  `meu código`
+
   * Ancora customizado por lingua: <anchor-get name="doc-title2"/>
   * Ancora customizado por lingua com texto customizado: <anchor-get name="doc-title2">texto customizado</anchor-get>
 </no-translate>
@@ -54,8 +59,8 @@ Meu texto do titulo 4
 
 ## Titulo 2.2 <header-set anchor-name="title5" />
 
-Meu texto do titulo 2.2
+Meu texto do titulo 2.2.
 
 ### Titulo 2.3 <header-set anchor-name="title6" />
 
-Meu texto do titulo 2.3 <anchor-set name="anchor-title6">e uma ancora</anchor-set>
+Meu texto do titulo "2.3". <anchor-set name="anchor-title6">e uma ancora</anchor-set>

@@ -6,7 +6,7 @@
       <language name="fr" output="output/readme-fr.md" />
     </languages>
     <content>
-      <include href="Sample/Page1_Index.md" />
+      <include href="Sample/Content.md" />
     </content>
   </page>
 
@@ -17,7 +17,7 @@
       <language name="en-us" output="output/doc/documentation.md" />
     </languages>
     <content>
-      <include href="Sample/Page1_Index.md" />
+      <include href="Sample/Content.md" />
     </content>
   </page>
 </documentation>

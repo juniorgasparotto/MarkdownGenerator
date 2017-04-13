@@ -1,4 +1,4 @@
-﻿using MarkdownMerge.Xml.Content;
+﻿using MarkdownMerge.Xml.Tags;
 using System;
 using System.Collections.Generic;
 using System.Linq;

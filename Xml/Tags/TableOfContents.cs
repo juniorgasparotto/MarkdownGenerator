@@ -6,7 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace MarkdownMerge.Xml.Content
+namespace MarkdownMerge.Xml.Tags
 {
     public class TableOfContents : NodeBase
     {
@@ -38,7 +38,7 @@ namespace MarkdownMerge.Xml.Content
             return strBuilder.ToString();
         }
 
-        public override void Process()
+        public override void ReplaceToMarkdown()
         {
             if (Node.ParentNode.Name == "p")
                 HtmlParser.ReplaceNode(Node.ParentNode, ToString());

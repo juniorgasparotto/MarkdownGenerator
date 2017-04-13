@@ -2,12 +2,9 @@
 using HtmlAgilityPack;
 using MarkdownMerge.Helpers;
 using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Xml;
-using System.Xml.Linq;
 
-namespace MarkdownMerge.Xml.Content
+namespace MarkdownMerge.Xml.Tags
 {
     public class AnchorGet : NodeBase
     {
@@ -21,7 +18,7 @@ namespace MarkdownMerge.Xml.Content
             this.CustomText = element.InnerHtml;
         }
 
-        public override void Process()
+        public override void ReplaceToMarkdown()
         {
             HtmlParser.ReplaceNode(Node, ToString());
         }
@@ -40,8 +37,7 @@ namespace MarkdownMerge.Xml.Content
             }
             else
             {
-                return "<ERR>";
-                //throw new Exception($"The anchor '{Name}' doesn't exist for language version {Version.Language.Name}: {Node.ToString()}");
+                throw new Exception($"The anchor '{Name}' doesn't exist for language version {Version.Language.Name}: {Node.ToString()}");
             }
         }
 

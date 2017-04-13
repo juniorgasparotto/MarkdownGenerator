@@ -1,5 +1,5 @@
 ﻿using MarkdownMerge.Translation;
-using MarkdownMerge.Xml.Content;
+using MarkdownMerge.Xml.Tags;
 using System.Collections.Generic;
 using HtmlAgilityPack;
 using Html2Markdown.Replacement;
@@ -74,8 +74,6 @@ namespace MarkdownMerge.Xml
             {
                 foreach (var no in noTranslations)
                 {
-                    //no.Attributes.Add("class", ElementNamesConstants.NotTranslateDefinition);
-                    //no.InnerHtml = no.InnerHtml.Trim();
                     var guid = Guid.NewGuid().ToString();
                     NodesSpecials.Add(guid, no);
                     HtmlParser.ReplaceNode(no, $"<p idreplace=\"{guid}\" />");
@@ -90,7 +88,6 @@ namespace MarkdownMerge.Xml
                 { 
                     foreach (var custom in customTransaltions)
                     {
-                        //custom.Attributes.Add("class", ElementNamesConstants.NotTranslateDefinition);
                         var guid = Guid.NewGuid().ToString();
                         NodesSpecials.Add(guid, custom);
                         HtmlParser.ReplaceNode(custom, $"<p idreplace=\"{guid}\" />");
@@ -195,12 +192,12 @@ namespace MarkdownMerge.Xml
 
         #endregion
 
-        #region Process - Step2
+        #region Generate final markdown - Step2
 
-        public string ToMarkdown()
+        public string GetMarkdown()
         {
             foreach (var node in Nodes)
-                node.Process();
+                node.ReplaceToMarkdown();
 
             var content = HtmlToMarkdown(this.XContent.DocumentNode.OuterHtml);
             return content;
