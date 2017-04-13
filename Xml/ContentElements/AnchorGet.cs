@@ -40,7 +40,8 @@ namespace MarkdownMerge.Xml.Content
             }
             else
             {
-                throw new Exception($"The anchor '{Name}' doesn't exist for language version {Version.Language.Name}: {Node.ToString()}");
+                return "<ERR>";
+                //throw new Exception($"The anchor '{Name}' doesn't exist for language version {Version.Language.Name}: {Node.ToString()}");
             }
         }
 

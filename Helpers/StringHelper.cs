@@ -39,5 +39,10 @@ namespace MarkdownMerge.Helpers
         {
             return new Uri(paths.Aggregate(uri.AbsoluteUri, (current, path) => string.Format("{0}/{1}", current.TrimEnd('/'), path.TrimStart('/'))));
         }
+
+        public static string TrimAllLines(string text)
+        {
+            return string.Join("\n", text.Split('\n').Select(s => s.Trim()));
+        }
     }
 }

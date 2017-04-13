@@ -40,7 +40,10 @@ namespace MarkdownMerge.Xml.Content
 
         public override void Process()
         {
-            HtmlParser.ReplaceNode(Node, ToString());
+            if (Node.ParentNode.Name == "p")
+                HtmlParser.ReplaceNode(Node.ParentNode, ToString());
+            else
+                HtmlParser.ReplaceNode(Node, ToString());
         }
     }
 }

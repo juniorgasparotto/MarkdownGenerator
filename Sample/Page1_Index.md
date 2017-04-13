@@ -39,12 +39,12 @@ Meu texto do titulo 4
 
 <custom-translation>
   <default>
-    <h1>Aqui tem um texto em Portugues <header-set anchor-name="doc-title2"/></h1>
+    # Aqui tem um texto em Portugues <header-set anchor-name="doc-title2"/>
     * Código `my code`
   </default>
 
   <language name="en-us">
-    <h1>Here is a custom text in English! <header-set anchor-name="doc-title2"/></h1>
+    # Here is a custom text in English! <header-set anchor-name="doc-title2"/>
   </language>
 
   <language name="fr">
