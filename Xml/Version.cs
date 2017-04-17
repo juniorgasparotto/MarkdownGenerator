@@ -125,14 +125,43 @@ namespace MarkdownGenerator.Xml
                     var tag = replace.Attributes["tag"].Value;
                     var node = NodesSpecials2[guid];
 
-                    if (tag == ElementNamesConstants.NoTranslation)
+                    switch (tag)
                     {
-                        node = ConvertMarkdownNodeToHtml(node);
+                        case ElementNamesConstants.NoTranslation:
+                            node = ConvertMarkdownNodeToHtml(node);
+                            break;
+                        case ElementNamesConstants.CustomTranslation:
+                            node = GetCustomTranslationText(node);
+                            break;
                     }
 
                     HtmlParser.ReplaceNode(replace, node);
                 }
             }
+        }
+
+        private string GetCustomTranslationText(string node)
+        {
+            if (this == Page.GetDefaultVersion())
+            {
+                var tag = ElementNamesConstants.CustomTranslationDefault;
+                var pattern = $@"<{tag}\s*?>(.*?)</{tag}>";
+                var matches = Regex.Match(node, pattern, RegexOptions.Singleline);
+                if (matches.Groups.Count > 1)
+                    node = matches.Groups[1].Value;
+            }
+            else
+            {
+                var tag = ElementNamesConstants.CustomTranslationLanguage;
+                var lang = this.Language.Name;
+                var pattern = $@"<{tag}\s+name=[""']{lang}[""']\s*?>(.*?)</{tag}>";
+                var matches = Regex.Match(node, pattern, RegexOptions.Singleline);
+                if (matches.Groups.Count > 1)
+                    node = matches.Groups[1].Value;
+            }
+
+            node = ConvertMarkdownNodeToHtml(node);
+            return node;
         }
 
         private void ReplaceCustomLanguage()
