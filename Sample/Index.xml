@@ -11,6 +11,7 @@
       Oi!!
 
       <include href="Sample/Content.md" />
+      <include href="Sample/Content.md" />
     </content>
   </page>
 
@@ -21,6 +22,10 @@
       <language name="en-us" output="output/doc/documentation.md" />
     </languages>
     <content>
+      <include href="Sample/Content.md" />
+      <include href="Sample/Content.md" />
+      <include href="Sample/Content.md" />
+      <include href="Sample/Content.md" />
       <include href="Sample/Content.md" />
     </content>
   </page>

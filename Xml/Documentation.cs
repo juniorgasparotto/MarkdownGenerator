@@ -2,6 +2,7 @@
 using MarkdownGenerator.Xml.Extensions;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 using System.Xml.Linq;
 
 namespace MarkdownGenerator.Xml
@@ -21,7 +22,6 @@ namespace MarkdownGenerator.Xml
                 e.ReplaceNodes(newElements.Nodes());
             }
 
-            XInclude.ReplaceXIncludes(xml);
             var xdoc = xml.Root;
             this.UrlBase = xdoc.Attribute("url-base")?.Value;
 

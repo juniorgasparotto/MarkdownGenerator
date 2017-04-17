@@ -1,6 +1,7 @@
 ﻿using SysCommand.ConsoleApp.Helpers;
 using System.IO;
 using System.Linq;
+using System.Text;
 using System.Xml.Linq;
 
 namespace MarkdownGenerator.Xml.Extensions
@@ -28,54 +29,28 @@ namespace MarkdownGenerator.Xml.Extensions
         /// </summary>
         public const string IncludeLocationAttributeName = "href";
 
-        /// <summary>
-        /// Defines the maximum sub include count of 25
-        /// </summary>
-        public const int MaxSubIncludeCountDefault = 25;
-
         #endregion
 
         #region methods
-
-
-        /// <summary>
-        /// Replaces XInclude references with the target content.
-        /// W3C Standard: http://www.w3.org/2003/XInclude
-        /// </summary>
-        /// <param name="xDoc">The xml doc.</param>
-        /// <param name="maxSubIncludeCount">The max. allowed nested xml includes (default: 25).</param>
-        public static void ReplaceXIncludes(this XDocument xDoc, int maxSubIncludeCount = MaxSubIncludeCountDefault)
+        
+        public static string GetXmlIncludeTag(this XElement xmlElement)
         {
-            ReplaceXIncludes(xDoc.Root, maxSubIncludeCount);
+            var strBuilder = new StringBuilder();
+            ParseXmlIncludeTag(xmlElement, strBuilder);
+            return strBuilder.ToString();
         }
-
-        /// <summary>
-        /// Replaces XInclude references with the target content.
-        /// W3C Standard: http://www.w3.org/2003/XInclude
-        /// </summary>
-        /// <param name="xmlElement">The XML element.</param>
-        /// <param name="maxSubIncludeCount">The max. allowed nested xml includes (default: 25).</param>
-        public static void ReplaceXIncludes(this XElement xmlElement, int maxSubIncludeCount = MaxSubIncludeCountDefault)
+        
+        private static void ParseXmlIncludeTag(this XElement xmlElement, StringBuilder strBuilder)
         {
-            xmlElement.ReplaceXIncludes(1, maxSubIncludeCount);
-        }
-
-        private static void ReplaceXIncludes(this XElement xmlElement, int subIncludeCount, int maxSubIncludeCount)
-        {
-            var results = xmlElement.DescendantsAndSelf(IncludeElementName).ToArray<XElement>();    // must be materialized
+            var results = xmlElement.DescendantsAndSelf(IncludeElementName).ToArray();    // must be materialized
 
             foreach (var includeElement in results)
             {
                 var path = includeElement.Attribute(IncludeLocationAttributeName).Value;
                 path = Path.GetFullPath(path);
-                var content = "<content>" + FileHelper.GetContentFromFile(path) + "</content>";
-                var doc = XDocument.Parse(content, LoadOptions.PreserveWhitespace);
-                if (subIncludeCount <= maxSubIncludeCount)  // protect mutal endless references
-                {
-                    // replace nested includes
-                    doc.Root.ReplaceXIncludes(++subIncludeCount, maxSubIncludeCount);
-                }
-                includeElement.ReplaceWith(((XElement)doc.FirstNode).Nodes());
+                var content = FileHelper.GetContentFromFile(path);
+                strBuilder.AppendLine(content);
+                strBuilder.AppendLine();
             }
         }
 

@@ -10,6 +10,11 @@ _Código em linha:_
 
 ```csharp
 meu código em bloco
+cmd> grep
+
+public void Metodo<Type>() {
+
+}
 ```
 
 Texto da ancora 6: <anchor-get name="anchor-title6" />
@@ -30,11 +35,18 @@ Texto do cabeçalho 1: <anchor-get name="title1">ancora customizada</anchor-get>
   
   ### Sub-titulo 1 <header-set anchor-name="no-translate-sub1"/>
   
-  `meu código`
+  cmd> grep
+
+  public void Metodo<Type>() {
+
+  }
 
   * Ancora customizado por lingua: <anchor-get name="doc-title2"/>
   * Ancora customizado por lingua com texto customizado: <anchor-get name="doc-title2">texto customizado</anchor-get>
 </no-translate>
+
+<no-translate>texto não traduzido</no-translate>
+<no-translate>texto não traduzido 2</no-translate>
 
 #### Titulo 4 <header-set anchor-name="title4" />
 
@@ -54,6 +66,8 @@ Meu texto do titulo 4
     # Franch <header-set anchor-name="doc-title2"/>
   </language>
 </custom-translation>
+
+A lingua é: <custom-translation><default>portugues</default><language name="en-us">inglês</language><language name="fr">francês</language></custom-translation>
 
 ## Titulo 2.2 <header-set anchor-name="title5" />
 

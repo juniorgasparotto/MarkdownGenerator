@@ -7,8 +7,8 @@
     <ProjectGuid>{48389C66-CC10-4A4A-AF84-451D4BD94294}</ProjectGuid>
     <OutputType>Exe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>MarkdownMerge</RootNamespace>
-    <AssemblyName>MarkdownMerge</AssemblyName>
+    <RootNamespace>MarkdownGenerator</RootNamespace>
+    <AssemblyName>MarkdownGenerator</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
@@ -331,13 +331,13 @@
     <Compile Include="Translator\Translator.cs" />
     <Compile Include="Xml\Extensions\XInclude.cs" />
     <Compile Include="Xml\Version.cs" />
-    <None Include="Connected Services\TranslatorService\MarkdownMerge.TranslatorService.GetTranslationsResponse.datasource">
+    <None Include="Connected Services\TranslatorService\MarkdownGenerator.TranslatorService.GetTranslationsResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
-    <None Include="Connected Services\TranslatorService\MarkdownMerge.TranslatorService.TranslateArray2Response.datasource">
+    <None Include="Connected Services\TranslatorService\MarkdownGenerator.TranslatorService.TranslateArray2Response.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
-    <None Include="Connected Services\TranslatorService\MarkdownMerge.TranslatorService.TranslateArrayResponse.datasource">
+    <None Include="Connected Services\TranslatorService\MarkdownGenerator.TranslatorService.TranslateArrayResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
     <None Include="Connected Services\TranslatorService\soap.wsdl" />

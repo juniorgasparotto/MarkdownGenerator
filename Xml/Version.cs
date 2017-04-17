@@ -8,6 +8,7 @@ using Markdig;
 using System.Linq;
 using System;
 using MarkdownGenerator.Helpers;
+using System.Text.RegularExpressions;
 
 namespace MarkdownGenerator.Xml
 {
@@ -15,6 +16,7 @@ namespace MarkdownGenerator.Xml
     {
         private HtmlDocument XContent { get; set; }
         private Dictionary<string, HtmlNode> NodesSpecials { get; } = new Dictionary<string, HtmlNode>();
+        private Dictionary<string, string> NodesSpecials2 { get; } = new Dictionary<string, string>();
 
         public Page Page { get; private set; }
         public Language Language { get; private set; }
@@ -66,36 +68,50 @@ namespace MarkdownGenerator.Xml
 
         private string RemoveSpecialGroupsElements(string html)
         {
-            var htmlObj = HtmlParser.GetHtmlDocument(html);
+            string replace(string tag) {
+                var noTranslationPattern = $@"<{tag}\s*?>(.*?)</{tag}>";
+                var replacement = "<p idreplace=\"{0}\" tag=\"{1}\"/>";
+                return Regex.Replace(html, noTranslationPattern, f => {
+                    var guid = Guid.NewGuid().ToString();
+                    NodesSpecials2.Add(guid, f.Groups[1].Value);
+                    return string.Format(replacement, guid, tag);
+                }, RegexOptions.Singleline | RegexOptions.IgnoreCase);
+            }
+
+            html = replace(ElementNamesConstants.NoTranslation);
+            html = replace(ElementNamesConstants.CustomTranslation);
+            return html;
+
+            // var htmlObj = HtmlParser.GetHtmlDocument(html);
 
             // remove spaces in no-translatin itens
-            var noTranslations = htmlObj.DocumentNode.SelectNodes("//" + ElementNamesConstants.NoTranslation);
-            if (noTranslations != null)
-            {
-                foreach (var no in noTranslations)
-                {
-                    var guid = Guid.NewGuid().ToString();
-                    NodesSpecials.Add(guid, no);
-                    HtmlParser.ReplaceNode(no, $"<p idreplace=\"{guid}\" />");
-                }
-            }
+            //var noTranslations = htmlObj.DocumentNode.SelectNodes("//" + ElementNamesConstants.NoTranslation);
+            //if (noTranslations != null)
+            //{
+            //    foreach (var no in noTranslations)
+            //    {
+            //        var guid = Guid.NewGuid().ToString();
+            //        NodesSpecials.Add(guid, no);
+            //        HtmlParser.ReplaceNode(no, $"<p idreplace=\"{guid}\" />");
+            //    }
+            //}
 
-            // add notranslate attr in custom translations
-            var customTransaltions = htmlObj.DocumentNode.SelectNodes("//" + ElementNamesConstants.CustomTranslation);
-            if (customTransaltions != null)
-            {
-                if (customTransaltions != null)
-                { 
-                    foreach (var custom in customTransaltions)
-                    {
-                        var guid = Guid.NewGuid().ToString();
-                        NodesSpecials.Add(guid, custom);
-                        HtmlParser.ReplaceNode(custom, $"<p idreplace=\"{guid}\" />");
-                    }
-                }
-            }
+            //// add notranslate attr in custom translations
+            //var customTransaltions = htmlObj.DocumentNode.SelectNodes("//" + ElementNamesConstants.CustomTranslation);
+            //if (customTransaltions != null)
+            //{
+            //    if (customTransaltions != null)
+            //    { 
+            //        foreach (var custom in customTransaltions)
+            //        {
+            //            var guid = Guid.NewGuid().ToString();
+            //            NodesSpecials.Add(guid, custom);
+            //            HtmlParser.ReplaceNode(custom, $"<p idreplace=\"{guid}\" />");
+            //        }
+            //    }
+            //}
 
-            return htmlObj.DocumentNode.OuterHtml;
+            //return htmlObj.DocumentNode.OuterHtml;
         }
 
         private void BackSpecialGroupElements()
@@ -105,8 +121,16 @@ namespace MarkdownGenerator.Xml
             {
                 foreach (var replace in replaces)
                 {
-                    var node = NodesSpecials[replace.Attributes["idreplace"].Value];
-                    HtmlParser.ReplaceNode(replace, node.OuterHtml);
+                    var guid = replace.Attributes["idreplace"].Value;
+                    var tag = replace.Attributes["tag"].Value;
+                    var node = NodesSpecials2[guid];
+
+                    if (tag == ElementNamesConstants.NoTranslation)
+                    {
+                        node = ConvertMarkdownNodeToHtml(node);
+                    }
+
+                    HtmlParser.ReplaceNode(replace, node);
                 }
             }
         }
@@ -230,6 +254,13 @@ namespace MarkdownGenerator.Xml
         private static string ConvertMarkdownNodeToHtml(HtmlNode element)
         {
             var markdown = StringHelper.TrimAllLines(element.InnerHtml);
+            var html = Markdown.ToHtml(markdown);
+            return html;
+        }
+
+        private static string ConvertMarkdownNodeToHtml(string xml)
+        {
+            var markdown = StringHelper.TrimAllLines(xml);
             var html = Markdown.ToHtml(markdown);
             return html;
         }

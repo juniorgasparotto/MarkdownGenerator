@@ -37,7 +37,9 @@ namespace MarkdownGenerator.Xml.Tags
             }
             else
             {
-                throw new Exception($"The anchor '{Name}' doesn't exist for language version {Version.Language.Name}: {Node.ToString()}");
+                var exceptionDesc = $"The anchor '{Name}' doesn't exist for language version {Version.Language.Name}: {Node.ToString()}";
+                return "<error>" + exceptionDesc + "</error>";
+                throw new Exception(exceptionDesc);
             }
         }
 

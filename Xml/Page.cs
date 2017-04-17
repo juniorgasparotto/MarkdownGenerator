@@ -22,6 +22,8 @@ namespace MarkdownGenerator.Xml
 
         private void ParseVersions(XElement xpage)
         {
+            var content = XInclude.GetXmlIncludeTag(xpage);
+
             var languages = xpage.Elements("languages");
             if (languages != null)
             {
@@ -34,7 +36,7 @@ namespace MarkdownGenerator.Xml
                         IsDefault = xlang.Attribute("default")?.Value == "true"
                     };
 
-                    new Version(this, lang, xpage.Element("content").InnerXml());
+                    new Version(this, lang, content);
                 }
             }
         }
