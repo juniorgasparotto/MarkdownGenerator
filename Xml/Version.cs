@@ -81,37 +81,6 @@ namespace MarkdownGenerator.Xml
             html = replace(ElementNamesConstants.NoTranslation);
             html = replace(ElementNamesConstants.CustomTranslation);
             return html;
-
-            // var htmlObj = HtmlParser.GetHtmlDocument(html);
-
-            // remove spaces in no-translatin itens
-            //var noTranslations = htmlObj.DocumentNode.SelectNodes("//" + ElementNamesConstants.NoTranslation);
-            //if (noTranslations != null)
-            //{
-            //    foreach (var no in noTranslations)
-            //    {
-            //        var guid = Guid.NewGuid().ToString();
-            //        NodesSpecials.Add(guid, no);
-            //        HtmlParser.ReplaceNode(no, $"<p idreplace=\"{guid}\" />");
-            //    }
-            //}
-
-            //// add notranslate attr in custom translations
-            //var customTransaltions = htmlObj.DocumentNode.SelectNodes("//" + ElementNamesConstants.CustomTranslation);
-            //if (customTransaltions != null)
-            //{
-            //    if (customTransaltions != null)
-            //    { 
-            //        foreach (var custom in customTransaltions)
-            //        {
-            //            var guid = Guid.NewGuid().ToString();
-            //            NodesSpecials.Add(guid, custom);
-            //            HtmlParser.ReplaceNode(custom, $"<p idreplace=\"{guid}\" />");
-            //        }
-            //    }
-            //}
-
-            //return htmlObj.DocumentNode.OuterHtml;
         }
 
         private void BackSpecialGroupElements()
@@ -291,7 +260,7 @@ namespace MarkdownGenerator.Xml
         {
             var markdown = StringHelper.TrimAllLines(xml);
             var html = Markdown.ToHtml(markdown);
-            return html;
+            return html.Trim();
         }
 
         #endregion
