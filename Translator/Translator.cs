@@ -10,7 +10,8 @@ namespace MarkdownGenerator.Translation
 {
     public static class Translator
     {
-        private const string SubscriptionKey = "679dbef3bf6345a2a1ff66314f9f6900";   //Enter here the Key from your Microsoft Translator Text subscription on http://portal.azure.com
+        //private const string SubscriptionKey = "679dbef3bf6345a2a1ff66314f9f6900";   //Enter here the Key from your Microsoft Translator Text subscription on http://portal.azure.com
+        private const string SubscriptionKey = "e51d6fba40a548d1b2fa6c76c428c7a6";   //Enter here the Key from your Microsoft Translator Text subscription on http://portal.azure.com
         private static string token;
         
         /// Demonstrates getting an access token and using the token to translate.

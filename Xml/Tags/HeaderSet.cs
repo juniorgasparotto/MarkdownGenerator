@@ -35,7 +35,8 @@ namespace MarkdownGenerator.Xml.Tags
 
         public override void ReplaceToMarkdown()
         {
-            ParentNode.InnerHtml = ToString();
+            if (!string.IsNullOrWhiteSpace(this.Text))
+                ParentNode.InnerHtml = ToString();
         }
 
         public override string ToString()
