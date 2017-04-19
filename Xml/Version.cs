@@ -242,10 +242,9 @@ namespace MarkdownGenerator.Xml
 
         private string TranslateHtml(string html, string toLang)
         {
-            return html;
             var fromLang = Page.GetDefaultVersion().Language.Name;
             if (fromLang != toLang)
-                return Translator.Translate(html, fromLang, toLang);
+                return Translator.TranslateChunk(html, fromLang, toLang);
             return html;
         }
 
