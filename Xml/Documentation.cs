@@ -9,21 +9,13 @@ namespace MarkdownGenerator.Xml
 {
     public class Documentation
     {
-        public string UrlBase { get; set; }
         public List<Page> Pages { get; } = new List<Page>();
 
         public Documentation(string xmlConfig)
         {
             var xml = XDocument.Load(xmlConfig, LoadOptions.PreserveWhitespace);
 
-            foreach (var e in xml.Descendants("content").ToList())
-            {
-                var newElements = XElement.Parse(StringHelper.TrimAllLines(e.OuterXml()).Trim(), LoadOptions.PreserveWhitespace);
-                e.ReplaceNodes(newElements.Nodes());
-            }
-
             var xdoc = xml.Root;
-            this.UrlBase = xdoc.Attribute("url-base")?.Value;
 
             foreach (var xpage in xdoc.Elements("page"))
                 this.Pages.Add(new Page(this, xpage));

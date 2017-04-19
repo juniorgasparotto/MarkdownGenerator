@@ -1,5 +1,5 @@
-﻿<documentation url-base="https://github.com/juniorgasparotto/SysCommand">
-  <page>
+﻿<documentation>
+  <page url-base="https://github.com/juniorgasparotto/SysCommand">
     <languages>
       <language name="pt-br" output="output/readme-ptbr.md" default="true" />
       <language name="en-us" output="output/readme.md" />
@@ -15,7 +15,7 @@
     </content>
   </page>
 
-  <page>
+  <page url-base="https://github.com/juniorgasparotto/SysCommand/blob/master/documentation">
     <languages>
       <language name="pt-br" output="output/doc/documentation-ptbr.md" default="true" />
       <language name="fr" output="output/doc/documentation-fr.md" />

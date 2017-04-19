@@ -11,30 +11,31 @@ namespace MarkdownGenerator.Xml.Tags
         public int Heading { get; private set; }
         public string Name { get; set; }
         public string Text { get; set; }
+        public HtmlNode ParentNode { get; private set; }
 
         public HeaderSet(Version version, HtmlNode element)
             : base(version, element)
         {
+            ParentNode = element.ParentNode;
             var tag = element.ParentNode.Name;
             var strings = new List<string> { "h1", "h2", "h3", "h4", "h5", "h6" };
             if (strings.Contains(tag))
             {
                 this.Heading = int.Parse(element.ParentNode.Name.Replace("h", ""));
                 this.Name = element.Attributes["anchor-name"].Value;
-                this.Text = element.ParentNode.InnerText.Trim();
+                element.Remove();
+                this.Text = ParentNode.InnerHtml.Trim();
             }
         }
 
         public string GetAnchorLink()
         {
-            var path = StringHelper.AppendUri(new Uri(Version.Page.Documentation.UrlBase), Version.Language.Output);
-            return path + "#" + Name;
+            return StringHelper.GetAnchorLink(Version.Page.UrlBase, Version.Language.Output, Name);
         }
 
         public override void ReplaceToMarkdown()
         {
-            Node.ParentNode.InnerHtml = ToString();
-            Node.Remove();
+            ParentNode.InnerHtml = ToString();
         }
 
         public override string ToString()

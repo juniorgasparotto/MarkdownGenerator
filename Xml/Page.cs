@@ -13,16 +13,18 @@ namespace MarkdownGenerator.Xml
     {
         public List<Version> Versions { get; } = new List<Version>();
         public Documentation Documentation { get; private set; }
+        public string UrlBase { get; internal set; }
 
         public Page(Documentation doc, XElement xpage)
         {
             this.Documentation = doc;
+            this.UrlBase = xpage.Attribute("url-base")?.Value;
             this.ParseVersions(xpage);
         }
 
         private void ParseVersions(XElement xpage)
         {
-            var content = XInclude.GetXmlIncludeTag(xpage);
+            var content = XContent.GetContent(xpage);
 
             var languages = xpage.Elements("languages");
             if (languages != null)

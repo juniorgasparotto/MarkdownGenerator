@@ -22,8 +22,8 @@ namespace MarkdownGenerator.Commands
             string baseDir = @"D:\Junior\Projetos\GITHUB.COM\juniorgasparotto\SysCommand"
         )
         {
-            indexFile = "Sample/Index.xml";
-            baseDir = null;
+            //indexFile = "Sample/Index.xml";
+            //baseDir = null;
 
             if (baseDir != null)
                 Directory.SetCurrentDirectory(baseDir);

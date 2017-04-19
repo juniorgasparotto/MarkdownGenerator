@@ -329,7 +329,7 @@
     </Compile>
     <Compile Include="Commands\MarkdownCommand.cs" />
     <Compile Include="Translator\Translator.cs" />
-    <Compile Include="Xml\Extensions\XInclude.cs" />
+    <Compile Include="Xml\XContent.cs" />
     <Compile Include="Xml\Version.cs" />
     <None Include="Connected Services\TranslatorService\MarkdownGenerator.TranslatorService.GetTranslationsResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>

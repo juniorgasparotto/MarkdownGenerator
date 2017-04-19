@@ -44,5 +44,14 @@ namespace MarkdownGenerator.Helpers
         {
             return string.Join("\n", text.Split('\n').Select(s => s.Trim()));
         }
+
+
+        public static string GetAnchorLink(string urlBase, string outputPath, string anchorName)
+        {
+            var path = "";
+            if (!string.IsNullOrEmpty(urlBase))
+                path = AppendUri(new Uri(urlBase), outputPath).ToString();
+            return path + "#" + anchorName;
+        }
     }
 }

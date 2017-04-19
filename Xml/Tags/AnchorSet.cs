@@ -22,8 +22,7 @@ namespace MarkdownGenerator.Xml.Tags
 
         public string GetAnchorLink()
         {
-            var path = StringHelper.AppendUri(new Uri(Version.Page.Documentation.UrlBase), Version.Language.Output);
-            return path + "#" + Name;
+            return StringHelper.GetAnchorLink(Version.Page.UrlBase, Version.Language.Output, Name);
         }
 
         public override void ReplaceToMarkdown()
