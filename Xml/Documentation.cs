@@ -1,8 +1,6 @@
-﻿using MarkdownGenerator.Helpers;
-using MarkdownGenerator.Xml.Extensions;
+﻿using MarkdownGenerator.Translation;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Xml.Linq;
 
 namespace MarkdownGenerator.Xml
@@ -10,9 +8,11 @@ namespace MarkdownGenerator.Xml
     public class Documentation
     {
         public List<Page> Pages { get; } = new List<Page>();
+        public Translator Translator { get; private set; }
 
-        public Documentation(string xmlConfig)
+        public Documentation(string xmlConfig, Translator translator)
         {
+            this.Translator = translator;
             var xml = XDocument.Load(xmlConfig, LoadOptions.PreserveWhitespace);
 
             var xdoc = xml.Root;

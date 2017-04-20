@@ -8,15 +8,22 @@ using System.Text;
 
 namespace MarkdownGenerator.Translation
 {
-    public static class Translator
+    public class Translator
     {
-        //private const string SubscriptionKey = "679dbef3bf6345a2a1ff66314f9f6900";   //Enter here the Key from your Microsoft Translator Text subscription on http://portal.azure.com
-        private const string SubscriptionKey = "e51d6fba40a548d1b2fa6c76c428c7a6";   //Enter here the Key from your Microsoft Translator Text subscription on http://portal.azure.com
+        private string SubscriptionKey = "e51d6fba40a548d1b2fa6c76c428c7a6";
         private static string token;
         
-        /// Demonstrates getting an access token and using the token to translate.
-        public static string TranslateChunk(string html, string langFrom, string langTo)
+        public Translator(string subscriptionKey)
         {
+            this.SubscriptionKey = subscriptionKey;
+        }
+
+        /// Demonstrates getting an access token and using the token to translate.
+        public string TranslateChunk(string html, string langFrom, string langTo)
+        {
+            if (SubscriptionKey == null)
+                return html;
+
             var strBuilder = new StringBuilder();
             var lstStr = new List<string>() { "" };
             var doc = HtmlParser.GetHtmlDocument(html);
@@ -37,8 +44,7 @@ namespace MarkdownGenerator.Translation
             return ret;
         }
 
-        /// Demonstrates getting an access token and using the token to translate.
-        public static string Translate(string html, string langFrom, string langTo)
+        public string Translate(string html, string langFrom, string langTo)
         {
             var translatorService = new TranslatorService.LanguageServiceClient();
             var authTokenSource = new AzureAuthToken(SubscriptionKey);

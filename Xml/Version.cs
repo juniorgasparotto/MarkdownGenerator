@@ -244,7 +244,7 @@ namespace MarkdownGenerator.Xml
         {
             var fromLang = Page.GetDefaultVersion().Language.Name;
             if (fromLang != toLang)
-                return Translator.TranslateChunk(html, fromLang, toLang);
+                return Page.Documentation.Translator.TranslateChunk(html, fromLang, toLang);
             return html;
         }
 

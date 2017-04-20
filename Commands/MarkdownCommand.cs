@@ -3,6 +3,7 @@ using SysCommand.Mapping;
 using MarkdownGenerator.Xml;
 using System.IO;
 using HtmlAgilityPack;
+using MarkdownGenerator.Translation;
 
 namespace MarkdownGenerator.Commands
 {
@@ -10,16 +11,19 @@ namespace MarkdownGenerator.Commands
     {
         public MarkdownCommand()
         {
-            this.HelpText = "Merge markdown files; Generate automatic table of contents; Generate anchor reference;";
+            this.HelpText = "This tools include: Merge markdown files, Automatic translation with MS Translator, Generate automatic table of contents, Generate anchor reference";
             HtmlNode.ElementsFlags["a"] = HtmlElementFlag.Empty | HtmlElementFlag.Closed | HtmlElementFlag.CanOverlap;
         }
 
         public void Main(
-            [Argument(Help = "Xml index file")]
-            string indexFile = @"documentation\.generator\index.xml",
+            [Argument(Help = "The xml config file")]
+            string indexFile,
 
-            [Argument(Help = "Base directory to save outputs")]
-            string baseDir = @"D:\Junior\Projetos\GITHUB.COM\juniorgasparotto\SysCommand"
+            [Argument(Help = "Base directory to save outputs. If empty the current directory will be used")]
+            string baseDir = null,
+
+            [Argument(Help = "Set the Microsoft Translator Key if your document has more than one language versions")]
+            string translatorKey = null
         )
         {
             //indexFile = "Sample/Index.xml";
@@ -27,8 +31,8 @@ namespace MarkdownGenerator.Commands
 
             if (baseDir != null)
                 Directory.SetCurrentDirectory(baseDir);
-
-            var doc = new Documentation(indexFile);
+            var translator = new Translator(translatorKey);
+            var doc = new Documentation(indexFile, translator);
             doc.Save();
         }
     }
