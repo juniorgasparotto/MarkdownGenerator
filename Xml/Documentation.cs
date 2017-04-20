@@ -10,9 +10,11 @@ namespace MarkdownGenerator.Xml
         public List<Page> Pages { get; } = new List<Page>();
         public Translator Translator { get; private set; }
 
-        public Documentation(string xmlConfig, Translator translator)
+        public Documentation(string xmlConfig, string translatorKey)
         {
-            this.Translator = translator;
+            if (!string.IsNullOrWhiteSpace(translatorKey))
+                Translator = new Translator(translatorKey);
+            
             var xml = XDocument.Load(xmlConfig, LoadOptions.PreserveWhitespace);
 
             var xdoc = xml.Root;

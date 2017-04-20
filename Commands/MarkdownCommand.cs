@@ -31,8 +31,7 @@ namespace MarkdownGenerator.Commands
 
             if (baseDir != null)
                 Directory.SetCurrentDirectory(baseDir);
-            var translator = new Translator(translatorKey);
-            var doc = new Documentation(indexFile, translator);
+            var doc = new Documentation(indexFile, translatorKey);
             doc.Save();
         }
     }

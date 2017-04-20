@@ -10,18 +10,18 @@ namespace MarkdownGenerator.Translation
 {
     public class Translator
     {
-        private string SubscriptionKey = "e51d6fba40a548d1b2fa6c76c428c7a6";
+        private string subscriptionKey;
         private static string token;
         
         public Translator(string subscriptionKey)
         {
-            this.SubscriptionKey = subscriptionKey;
+            this.subscriptionKey = subscriptionKey;
         }
 
         /// Demonstrates getting an access token and using the token to translate.
         public string TranslateChunk(string html, string langFrom, string langTo)
         {
-            if (SubscriptionKey == null)
+            if (subscriptionKey == null)
                 return html;
 
             var strBuilder = new StringBuilder();
@@ -47,7 +47,7 @@ namespace MarkdownGenerator.Translation
         public string Translate(string html, string langFrom, string langTo)
         {
             var translatorService = new TranslatorService.LanguageServiceClient();
-            var authTokenSource = new AzureAuthToken(SubscriptionKey);
+            var authTokenSource = new AzureAuthToken(subscriptionKey);
 
             try
             {
