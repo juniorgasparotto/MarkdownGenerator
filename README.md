@@ -4,7 +4,7 @@ This tool is an executable (with some dependencies) that tries to solve common p
 
 Download, unzip and use:
 
-https://github.com/juniorgasparotto/MarkdownGenerator/tree/master/download/markdown-generator.zip
+https://github.com/juniorgasparotto/MarkdownGenerator/blob/master/download/markdown-generator.zip
 
 **Comments:**
 
