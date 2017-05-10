@@ -4,7 +4,7 @@ Essa ferramenta é um executável (com algumas dependências) que tenta resolver
 
 Baixe, descompacte e use:
 
-https://github.com/juniorgasparotto/MarkdownGenerator/blob/master/download/markdown-generator.zip
+https://github.com/juniorgasparotto/MarkdownGenerator/raw/master/download/markdown-generator.zip
 
 **Observações:**
 
