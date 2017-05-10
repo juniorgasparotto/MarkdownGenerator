@@ -1,73 +1,192 @@
 # Markdown generator
 
-Essa ferramenta é um executável (com algumas dependências) que tenta resolver problemas comuns para quem escreve documentos no formato markdown.
+This tool is an executable (with some dependencies) that tries to solve common problems for people who write with markdown documents.
 
-Baixe, descompacte e use:
+Download, unzip and use:
 
-https://github.com/juniorgasparotto/MarkdownGenerator/tree/master/final/markdown-generator.zip
+https://github.com/juniorgasparotto/MarkdownGenerator/tree/master/download/markdown-generator.zip
+
+**Comments:**
+
+* This zip contains an example
+* This tool is supported only on Windows, but it is possible to port it to other operating systems if you have many requests.
+
+# How to use?
+
+To use, specify the name of the executable at the command prompt, followed by the arguments:
+
+* `--index-file`: This argument is required and must contain the name of the configuration file.
+* `--base-dir`: Sets the base directory. If not specified, the current directory will be used.
+* `--translator-key`: Sets the authentication key translation API from Microsoft. If not specified, no translation is made.
+* `--verbose`: Specify the value `error` to show any failure.
+* `help`: Displays help text
+
+Note: to generate an API key, you need to register on the portal of Azure and set up cognitive service. Remember that this service is paid, but there are free plans for experiments. See the link for more information:
+
+https://www.microsoft.com/en-us/translator/getstarted.aspx
+
+**Examples of use:**
 
 ```
-MarkdownGenerator.exe "index.xml" "C:\doc-root" --verbose error
+MarkdownGenerator.exe help
 ```
 
-Nota: Essa ferramenta é suportada apenas no Windows, mas é possível porta-la para outros sistemas operacionais caso tenha muitos pedidos.
+```
+MarkdownGenerator.exe --index-file "index.xml" --base-dir "C:\my-doc" --translator-key [api-key] --verbose error
+```
 
-# Quais são os problemas que ela resolve?
+_The names of the arguments can be omitted:_
 
-É útil para a criação de grandes documento na linguagem MarkDown e tem os seguintes objetivos:
+```
+MarkdownGenerator.exe "index.xml" "C:\my-doc" [api-key] --verbose error
+```
 
-* Separar o conteúdo do seu documento em um ou mais arquivos, facilitando a manutenção. Imagine a situação onde você precisa mover um grande bloco de texto de um lugar para o outro sem nenhum esforço ou risco. 
-* Dividir seu documento em duas ou mais páginas.
-* Criação de âncoras para serem utilizadas em diversos locais mantendo o texto original do momento em que foi criada. 
-* Gerar índice de forma automática de acordo com a hierarquia do markdown ("#" para h1 e "##" para h2 e etc).
-* Tradução automática usando a ferramenta "Microsoft Azure - Translator API".
-  * É possível criar blocos de textos que não são traduzivél.
-  * É possível criar blocos de textos com uma tradução customizada. Isso é útil em caso de textos muitos especificos onde nenhuma tradução consegue chegar no resultado esperado.
+# What are the problems that it solves?
 
-# Separar seu documento em diversos arquivos usando a tag `Include`
+Is useful for the creation of large document on MarkDown language and has the following objectives:
 
-# Divisão do documentos em mais de uma página
+* Separate the contents of your document into one or more files, facilitating maintenance. Imagine the situation where you need to move a large block of text from one place to another without any effort or risk.
+* Divide your document into two or more pages.
+* Creation of anchors to be used in multiple locations while keeping the original text of the moment in which it was created.
+* Generate index automatically according to the hierarchy of markdown ("#" to h1 and "##" to h2 and etc).
+* Machine translation by using the tool "Microsoft Azure-Translator API".
+  * You can create blocks of text that are not traduzivél.
+  * You can create text blocks with a custom translation. This is useful in case of many specific texts where no translation can get the expected result.
 
-# Âncoras
+# The configuration file
 
-# Índice automático
+This file contains all the settings for your document. It is composed, compulsorily, by tags:
 
-# Tradução automática
+* documentation (only one)
+  * page (one or more)
+    * languages (only one)
+      * language (one or more)
+    * content (only one)
 
-## Tag `custom-translation`
+```xml
+<documentation>
+  <page url-base="https://github.com/user/project">
+    <languages>
+      <language name="pt-br" output="page1-pt-br.md" default="true" />
+      <language name="en-us" output="page1.md" />
+      <!--Others languages-->
+    </languages>
+    <content>
+        <include href="files/page1-part1.md" />
+        <include href="files/page1-part2.md" />
+    </content>
+  </page>
+
+  <page url-base="https://github.com/user/project/blob/master">
+    <languages>
+      <language name="pt-br" output="page2-pt-br.md" default="true" />
+      <language name="en-us" output="page2-en.md" />
+      <!--Others languages-->
+    </languages>
+    <content>
+        <include href="files/page2-part1.md" />
+        <include href="files/page2-part2.md" />
+    </content>
+  </page>
+</documentation>
+```
+
+**Tag`page`**
+
+It is mandatory that there is at least one occurrence of this tag. It is composed by the tags `languages` and `content` . She represents a document that can be translated into other languages. Each language version is equivalent to a physical file.
+
+The `url-base` attribute is not required if there is only one tag `page` . It is useful for assembling the anchors with the full path, so you can use anchors that are in another `page` .
+
+**Tag`languages`**
+
+To define a new language, add the tag `language` within the tag `languages` . It is mandatory that there is at least one language configured and that language must be the same as your content. It is obligatory the use of the `default=true` attribute for the default language.
+
+Each tag `language` contains the following attributes:
+
+* `name`: Sets the language abbreviation (https://dev.microsofttranslator.com/languages?api-version=1.0)
+* `output`: Sets the path where the final file will be saved. The relative folder will always be the folder that executavél this running, but you can change this relative path using the `--base-dir` argument.
+* `default`: Defines which tag `language` corresponds to the default language.
+
+**Tag`content`**
+
+Is the content of your document, it is strongly advised that your text will be separated into other files using the tag `include` . However, you can still leave your text directly in that tag, just avoid texts that look like xml tags, for example: `Func<T>` .
+
+This tag is mandatory there.
+
+**Tag`include`**
+
+This tag defines a content that this within another file. By Convention use the `.md` extension to your files, some publishers can interpret this extension as being `markdown` . Use the `href="file.md"` attribute to load a content.
+
+# Anchors
+
+To create an anchor, simply insert the tag `anchor-set` anywhere in your text. This tag has the `name` attribute that will be used to retrieve it when needed. Your text should be within your content.
+
+The tag `anchor-get` is responsible for retrieving this anchor anywhere in your text. This tag has the `name` attribute that must match an anchor that was set in another time. If you set a content, then this text will be used in your link, otherwise the text of the anchor definition will be used. This is very useful for changes to be made in one place.
+
+```xml
+Set ancor: <anchor-set name="anchor-name">custom ancor</anchor-set>
+Get ancor with original text: <anchor-get name="anchor-name" />
+Get ancor with custom text: <anchor-get name="anchor-name">custom text</anchor-get>
+```
+
+# Automatic table of contents
+
+To add an index, use the tag `<table-of-contents />` where you want the index to appear. However, for this to work, all your headers should have the tag `header-set` at the end of the line. This tag contains the required attribute `name` that adds this header on list of anchors. So you can use the tag `anchor-get` for a header.
+
+```xml
+<table-of-contents />
+
+# Header H1 <header-set name="header-1" />
+Text
+## Header H2 <header-set name="header-2" />
+Text
+### Header H3 <header-set name="header-3" />
+Text
+#### Header H4 <header-set name="header-4" />
+Text
+##### Header H5 <header-set name="header-5" />
+Text
+###### Header H6 <header-set name="header-6" />
+Text
+
+Get header anchor: <anchor-get name="header-1" />
+```
+
+# Customized translation
+
+The tag `custom-translation` is useful in case of many specific texts where no translation can get the expected result.
 
 ```xml
 <custom-translation>
     <default>
-        
+        Esse texto está em português
     </default>
 
     <language name="en-us">
-        ---
-        <sub>This text was translated by a machine</sub>
-
-        https://github.com/juniorgasparotto/MarkdownGenerator
+        This text is customized for english
     </language>
-</custom-translation>
+</custom-translation >
 ```
 
-## Tag `no-translate`
+# Text that cannot be translated
+
+To create blocks of text that cannot be translated, use the tag `no-translate` . By default, markdown-formatted code blocks are not translated.
 
 ```xml
-<no-translate>This text can't be translated</no-translate>
+<no-translate>This text can't be translated</no-translate >
 ```
 
-# Limitações
+# Limitations
 
-É importante ressaltar que essa ferramenta não consegue resolver todos os problemas e também contém diversos problemas que devem ser contornados pelo usuário da melhor forma possível. Considere mudar o formato de seu texto quando possível. 
+It is important to note that this tool can't solve every problem and also contains several problems that must be resolved by the user in the best way possible. Consider changing the format of your text when possible.
 
-Os principais motivos desses problemas são:
+The main reasons of these problems are:
 
-* Ela foi baseada no padrão do github, qualquer outro padrão não funcionará como esperado.
-* Devido ao processo de tradução, algumas etapas de conversões podem prejudicar o formato original e alterar o resultado final. Essas etapas são:
-  * Converte o contéudo, que está no formato markdown, para html. Isso é feito, pois a API de tradução não suporta o formato markdown. Caso alguem conheça alguma ferramenta que faça isso, nos informe que alteramos o código para suporta-la. (https://github.com/baynezy/Html2Markdown)
-  * Traduz o html para a lingua especificada. (https://portal.azure.com/)
-  * Converte de volta para markdown (https://github.com/lunet-io/markdig)
-* Não foram feitos testes complexos
+* She was based on the standard of github, any other pattern will not work as expected.
+* Due to the translation process, some steps of conversions can harm the original format and change the end result. These steps are:
+  * Converts the content, that is with markdown to html. This is done because the translation API does not support the markdown format. If anyone knows any tools to do this, let us know that we changed the code to support it. (https://github.com/baynezy/Html2Markdown)
+  * Translates the html for the specified language. (https://portal.azure.com/)
+  * Converts back to markdown (https://github.com/lunet-io/markdig)
+* Not been made complex tests
 
-Nota: Devido a algumas customizações, o código dos pacotes "Html2Markdown" e "Markdig" foram copiados para o projeto. Agradeço aos criadores pelo ótimo trabalho.
+Note: due to some customizations, the package code "Html2Markdown" and "Markdig" were copied into the project. I thank the creators for the great work.
