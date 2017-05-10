@@ -8,7 +8,6 @@ https://github.com/juniorgasparotto/MarkdownGenerator/tree/master/download/markd
 
 **Comments:**
 
-* This zip contains an example
 * This tool is supported only on Windows, but it is possible to port it to other operating systems if you have many requests.
 
 # How to use?
