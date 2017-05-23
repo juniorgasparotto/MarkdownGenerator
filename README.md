@@ -1,3 +1,11 @@
+<a href="https://github.com/juniorgasparotto/MarkdownGenerator" rel="Inglês">
+  <img alt="Inglês" src="https://github.com/juniorgasparotto/MarkdownGenerator/blob/master/doc/img/en-us.png" />
+</a>
+
+<a href="https://github.com/juniorgasparotto/MarkdownGenerator/blob/master/readme-pt-br.md" rel="Português">
+  <img alt="Português" src="https://github.com/juniorgasparotto/MarkdownGenerator/blob/master/doc/img/pt-br.png" />
+</a>
+
 # Markdown generator
 
 This tool is an executable (with some dependencies) that tries to solve common problems for people who write with markdown documents.
