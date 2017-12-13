@@ -1,7 +1,8 @@
-﻿using SysCommand.ConsoleApp;
-using System.Linq;
+﻿using Publisher.CommandSpecific.Chocolatey;
+using Publisher.Core;
+using SysCommand.ConsoleApp;
 
-namespace WiremockUI.Publish
+namespace Publisher.CommandSpecific
 {
     public class PublishCommand : Command
     {

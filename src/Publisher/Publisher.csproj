@@ -75,6 +75,29 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CommandsSpecific\Chocolatey\ChocolateyCommand.cs" />
+    <Compile Include="CommandsSpecific\Chocolatey\Nuspec\nuspec.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>nuspec.tt</DependentUpon>
+    </Compile>
+    <Compile Include="CommandsSpecific\Chocolatey\Nuspec\tools-t4\chocolateybeforemodify.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>chocolateybeforemodify.tt</DependentUpon>
+    </Compile>
+    <Compile Include="CommandsSpecific\Chocolatey\Nuspec\tools-t4\chocolateyinstall.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>chocolateyinstall.tt</DependentUpon>
+    </Compile>
+    <Compile Include="CommandsSpecific\Chocolatey\Nuspec\tools-t4\chocolateyuninstall.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>chocolateyuninstall.tt</DependentUpon>
+    </Compile>
+    <Compile Include="CommandsSpecific\PackCommand.cs" />
+    <Compile Include="CommandsSpecific\PublishCommand.cs" />
     <Compile Include="Core\ConvertBase64.cs" />
     <Compile Include="Core\GitHub.cs" />
     <Compile Include="Core\MimeType.cs" />
@@ -90,7 +113,7 @@
     <Compile Include="Core\AppInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include=".app\app.info.json" />
+    <None Include="CommandsSpecific\Chocolatey\Nuspec\tools\Uninstall-ChocolateyPath.psm1" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
@@ -110,6 +133,25 @@
       <ProductName>.NET Framework 3.5 SP1</ProductName>
       <Install>false</Install>
     </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="CommandsSpecific\Chocolatey\Nuspec\nuspec.tt">
+      <Generator>TextTemplatingFilePreprocessor</Generator>
+      <LastGenOutput>nuspec.cs</LastGenOutput>
+    </Content>
+    <Content Include="CommandsSpecific\Chocolatey\Nuspec\tools-t4\chocolateybeforemodify.tt">
+      <Generator>TextTemplatingFilePreprocessor</Generator>
+      <LastGenOutput>chocolateybeforemodify.cs</LastGenOutput>
+    </Content>
+    <Content Include="CommandsSpecific\Chocolatey\Nuspec\tools-t4\chocolateyinstall.tt">
+      <Generator>TextTemplatingFilePreprocessor</Generator>
+      <LastGenOutput>chocolateyinstall.cs</LastGenOutput>
+    </Content>
+    <Content Include="CommandsSpecific\Chocolatey\Nuspec\tools-t4\chocolateyuninstall.tt">
+      <Generator>TextTemplatingFilePreprocessor</Generator>
+      <LastGenOutput>chocolateyuninstall.cs</LastGenOutput>
+    </Content>
+    <Content Include="CommandsSpecific\readme.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
