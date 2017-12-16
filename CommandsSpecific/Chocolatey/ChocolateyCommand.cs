@@ -16,7 +16,7 @@ namespace Publisher.CommandSpecific.Chocolatey
         {
             get
             {
-                return new DirectoryInfo(Path.Combine(PathCommand.RootDirectory, "CommandsSpecifics", "Chocolatey", "Nuspec", "tools"));
+                return new DirectoryInfo(Path.Combine(PathCommand.RootDirectory, "CommandsSpecific", "Chocolatey", "Nuspec", "tools"));
             }
         }
 
@@ -87,7 +87,7 @@ namespace Publisher.CommandSpecific.Chocolatey
                 var appInfo = AppInfo.GetAppInfo();
                 if (string.IsNullOrWhiteSpace(appInfo.ChocolateyProjectUrl))
                 {
-                    appInfo.ChocolateyProjectUrl = App.Console.Read("Chocolatey.ProjectUrl: ");
+                    appInfo.ChocolateyProjectUrl = App.Console.Read("Chocolatey.ProjectUrl (use '{version}' placeholder): ");
                     AppInfo.SaveAppInfo(appInfo);
                 }
                 return appInfo.ChocolateyProjectUrl;

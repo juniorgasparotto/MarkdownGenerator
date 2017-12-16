@@ -113,8 +113,10 @@
     <Compile Include="Core\AppInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include=".app\app.info.json" />
     <None Include="CommandsSpecific\Chocolatey\Nuspec\tools\Uninstall-ChocolateyPath.psm1" />
     <None Include="packages.config" />
+    <None Include="pull.bat" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Properties\" />
