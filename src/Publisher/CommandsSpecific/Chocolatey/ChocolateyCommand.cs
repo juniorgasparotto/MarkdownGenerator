@@ -40,6 +40,26 @@ namespace Publisher.CommandSpecific.Chocolatey
             }
         }
 
+        public string ChocolateyTitle
+        {
+            get
+            {
+                var appInfo = AppInfo.GetAppInfo();
+                if (string.IsNullOrWhiteSpace(appInfo.ChocolateyTitle))
+                {
+                    appInfo.ChocolateyTitle = App.Console.Read("Chocolatey.Title: ");
+                    AppInfo.SaveAppInfo(appInfo);
+                }
+                return appInfo.ChocolateyPackageName;
+            }
+            set
+            {
+                var appInfo = AppInfo.GetAppInfo();
+                appInfo.ChocolateyTitle = value;
+                AppInfo.SaveAppInfo(appInfo);
+            }
+        }
+        
         public string ChocolateyExeName
         {
             get
@@ -116,6 +136,26 @@ namespace Publisher.CommandSpecific.Chocolatey
             {
                 var appInfo = AppInfo.GetAppInfo();
                 appInfo.ChocolateyLicenceUrl = value;
+                AppInfo.SaveAppInfo(appInfo);
+            }
+        }
+
+        public string ChocolateyIconUrl
+        {
+            get
+            {
+                var appInfo = AppInfo.GetAppInfo();
+                if (string.IsNullOrWhiteSpace(appInfo.ChocolateyIconUrl))
+                {
+                    appInfo.ChocolateyIconUrl = App.Console.Read("Chocolatey.IconUrl: ");
+                    AppInfo.SaveAppInfo(appInfo);
+                }
+                return appInfo.ChocolateyIconUrl;
+            }
+            set
+            {
+                var appInfo = AppInfo.GetAppInfo();
+                appInfo.ChocolateyIconUrl = value;
                 AppInfo.SaveAppInfo(appInfo);
             }
         }
@@ -207,13 +247,15 @@ namespace Publisher.CommandSpecific.Chocolatey
                 var newVersion = Utils.GetVersionToString(Utils.GetCurrentVersion(pathCommand.TargetProjectAssemblyInfoPath));
 
                 var vars = new Dictionary<string, string>();
+                vars.Add("exeName", ChocolateyExeName);
+                vars.Add("packageName", ChocolateyPackageName);                
+                vars.Add("title", ChocolateyTitle);
                 vars.Add("version", newVersion);
                 vars.Add("url", ChocolateyUrlDownload.Replace("{version}", newVersion));
-                vars.Add("exeName", ChocolateyExeName);
-                vars.Add("packageName", ChocolateyPackageName);
-                vars.Add("author", ChocolateyAuthor);
+                vars.Add("iconUrl", ChocolateyIconUrl);
                 vars.Add("projectUrl", ChocolateyProjectUrl);
                 vars.Add("licenceUrl", ChocolateyLicenceUrl);
+                vars.Add("author", ChocolateyAuthor);
                 vars.Add("tags", ChocolateyTags);
                 vars.Add("description", ChocolateyDescription);
 

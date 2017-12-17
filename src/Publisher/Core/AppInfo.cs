@@ -20,12 +20,13 @@ namespace Publisher.Core
         public string GitHubRepositoryName { get; set; }
 
         public string ChocolateyPath { get; set; }
-        public string ChocolateyPackageName { get; set; }
-        public string ChocolateyUserName { get; set; }
         public string ChocolateyExeName { get; set; }
+        public string ChocolateyPackageName { get; set; }
+        public string ChocolateyTitle { get; set; }
         public string ChocolateyUrlDownload { get; set; }
         public string ChocolateyProjectUrl { get; set; }
         public string ChocolateyLicenceUrl { get; set; }
+        public string ChocolateyIconUrl { get; set; }
         public string ChocolateyTags { get; set; }
         public string ChocolateyDescription { get; set; }
         public string ChocolateyAuthor { get; set; }

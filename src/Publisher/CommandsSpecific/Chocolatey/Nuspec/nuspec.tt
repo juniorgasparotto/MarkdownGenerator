@@ -11,12 +11,13 @@
   <metadata>
     <id><#= vars["packageName"] #></id>
     <version><#= vars["version"] #></version>
-    <title><#= vars["packageName"] #></title>
+    <title><#= vars["title"] #></title>
     <authors><#= vars["author"] #></authors>
     <projectUrl><#= vars["projectUrl"] #></projectUrl>
     <licenseUrl><#= vars["licenceUrl"] #></licenseUrl>
     <tags><#= vars["tags"] #></tags>
     <description><#= vars["description"] #></description>
+	<iconUrl><#= vars["iconUrl"] #></iconUrl>
   </metadata>
   <files>
     <file src="tools\**" target="tools" />
