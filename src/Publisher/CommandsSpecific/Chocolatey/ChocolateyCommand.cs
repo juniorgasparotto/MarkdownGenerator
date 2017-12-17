@@ -50,7 +50,7 @@ namespace Publisher.CommandSpecific.Chocolatey
                     appInfo.ChocolateyTitle = App.Console.Read("Chocolatey.Title: ");
                     AppInfo.SaveAppInfo(appInfo);
                 }
-                return appInfo.ChocolateyPackageName;
+                return appInfo.ChocolateyTitle;
             }
             set
             {
