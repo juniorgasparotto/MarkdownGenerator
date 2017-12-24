@@ -87,7 +87,7 @@ namespace Publisher.CommandSpecific.Chocolatey
                 var appInfo = AppInfo.GetAppInfo();
                 if (string.IsNullOrWhiteSpace(appInfo.ChocolateyUrlDownload))
                 {
-                    appInfo.ChocolateyUrlDownload = App.Console.Read("Chocolatey.UrlDownload: ");
+                    appInfo.ChocolateyUrlDownload = App.Console.Read("Chocolatey.UrlDownload (use '{version}' placeholder): ");
                     AppInfo.SaveAppInfo(appInfo);
                 }
                 return appInfo.ChocolateyUrlDownload;
@@ -107,7 +107,7 @@ namespace Publisher.CommandSpecific.Chocolatey
                 var appInfo = AppInfo.GetAppInfo();
                 if (string.IsNullOrWhiteSpace(appInfo.ChocolateyProjectUrl))
                 {
-                    appInfo.ChocolateyProjectUrl = App.Console.Read("Chocolatey.ProjectUrl (use '{version}' placeholder): ");
+                    appInfo.ChocolateyProjectUrl = App.Console.Read("Chocolatey.ProjectUrl: ");
                     AppInfo.SaveAppInfo(appInfo);
                 }
                 return appInfo.ChocolateyProjectUrl;
