@@ -11,7 +11,7 @@ namespace Publisher
             return App.RunApplication(() =>
             {
                 var loader = new AppDomainCommandLoader();
-                //loader.IgnoreCommand<ArgsHistoryCommand>();
+                //loader.IgnoreCommand<ArgsHistoryCommand>(); // teste
                 var app = new App(loader.GetFromAppDomain());
                 app.Console.ColorRead = System.ConsoleColor.Blue;
                 app.Console.Verbose = Verbose.All;
