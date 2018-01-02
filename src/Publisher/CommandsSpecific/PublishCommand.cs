@@ -1,6 +1,7 @@
 ﻿using Publisher.CommandSpecific.Chocolatey;
 using Publisher.Core;
 using SysCommand.ConsoleApp;
+using System.Collections.Generic;
 
 namespace Publisher.CommandSpecific
 {
@@ -14,9 +15,17 @@ namespace Publisher.CommandSpecific
             var github = App.Commands.Get<GitHubCommand>();
             var pathCommand = App.Commands.Get<PathCommand>();
             var chocolateyCommand = App.Commands.Get<ChocolateyCommand>();
+            var fileReplaceCommand = App.Commands.Get<FileReplaceCommand>();
+            var gitCommand = App.Commands.Get<GitCommand>();
 
             Title("SET NEXT VERSION");
             version.Next();
+
+            Title("UPDATE VERSION IN TEXT FILES");
+            fileReplaceCommand.Version();
+
+            Title("CHECK GIT STATUS");
+            gitCommand.CheckUncommitedFiles();
 
             Title("BUILD");
             build.Clear();
@@ -24,7 +33,7 @@ namespace Publisher.CommandSpecific
 
             Title("PACK");
             pack.Pack();
-
+            
             if (Utils.Continue(this, "Do you create a new release in github?"))
             {
                 Title("GITHUB - CREATE NEW RELEASE");

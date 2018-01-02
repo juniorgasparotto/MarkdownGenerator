@@ -10,9 +10,39 @@
 
 Essa ferramenta é um executável (com algumas dependências) que tenta resolver problemas comuns para quem escreve documentos no formato markdown.
 
-Baixe, descompacte e use:
+## Instalação (Manual)
 
-https://github.com/juniorgasparotto/MarkdownGenerator/raw/master/download/markdown-generator.zip
+1. Fazer o download do .zip <a href="https://github.com/juniorgasparotto/MarkdownGenerator/releases/download/1.0.1/MarkdownGenerator.zip">clicando aqui</a>
+2. Extrair o .zip em qualquer local
+3. Executar o arquivo via linha de comando `MarkdownGenerator.exe`
+
+```
+MarkdownGenerator.exe --base-dir "C:\my-doc-folder" --index-file "index.xml" --translator-key [api-key] --verbose error
+```
+
+**DOWNLOAD LINK**: https://github.com/juniorgasparotto/MarkdownGenerator/releases/download/1.0.1/MarkdownGenerator.zip
+
+_Não precisa de instalação_
+
+## Instalação (Chocolatey)
+
+```
+choco install markdown-generator
+```
+
+Url: https://chocolatey.org/packages/Markdown-Generator/1.0.1
+
+**Atualização**
+
+```
+choco upgrade markdown-generator
+```
+
+**Desinstalação**
+
+```
+choco uninstall markdown-generator
+```
 
 **Observações:**
 
@@ -39,13 +69,13 @@ MarkdownGenerator.exe help
 ```
 
 ```
-MarkdownGenerator.exe --index-file "index.xml" --base-dir "C:\my-doc" --translator-key [api-key] --verbose error
+MarkdownGenerator.exe --base-dir "C:\my-doc-folder" --index-file "index.xml" --translator-key [api-key] --verbose error
 ```
 
 _Os nomes dos argumentos podem ser omitidos:_
 
 ```
-MarkdownGenerator.exe "index.xml" "C:\my-doc" [api-key] --verbose error
+MarkdownGenerator.exe "index.xml" "C:\my-doc-folder" [api-key] --verbose error
 ```
 
 # Quais são os problemas que ela resolve?

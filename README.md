@@ -1,18 +1,47 @@
-<a href="https://github.com/juniorgasparotto/MarkdownGenerator" rel="Inglês">
-  <img alt="Inglês" src="https://github.com/juniorgasparotto/MarkdownGenerator/blob/master/doc/img/en-us.png" />
-</a>
-
-<a href="https://github.com/juniorgasparotto/MarkdownGenerator/blob/master/readme-pt-br.md" rel="Português">
-  <img alt="Português" src="https://github.com/juniorgasparotto/MarkdownGenerator/blob/master/doc/img/pt-br.png" />
-</a>
+[
+  ![Inglês](https://github.com/juniorgasparotto/MarkdownGenerator/blob/master/doc/img/en-us.png)
+](https://github.com/juniorgasparotto/MarkdownGenerator)
+[
+  ![Português](https://github.com/juniorgasparotto/MarkdownGenerator/blob/master/doc/img/pt-br.png)
+](https://github.com/juniorgasparotto/MarkdownGenerator/blob/master/readme-pt-br.md)
 
 # Markdown generator
 
 This tool is an executable (with some dependencies) that tries to solve common problems for people who write with markdown documents.
 
-Download, unzip and use:
+## Installation (Manual)
 
-https://github.com/juniorgasparotto/MarkdownGenerator/raw/master/download/markdown-generator.zip
+1. Download the .zip file [by clicking here](https://github.com/juniorgasparotto/MarkdownGenerator/releases/download/1.0.1/MarkdownGenerator.zip)
+2. Extract the .zip anywhere
+3. Run the file via the command line`MarkdownGenerator.exe`
+
+```
+MarkdownGenerator.exe --base-dir "C:\my-doc-folder" --index-file "index.xml" --translator-key [api-key] --verbose error
+```
+
+**DOWNLOAD LINK**: https://github.com/juniorgasparotto/MarkdownGenerator/releases/download/1.0.1/MarkdownGenerator.zip
+
+_No need for installation_
+
+## Installation (Chocolatey)
+
+```
+choco install markdown-generator
+```
+
+URL: https://chocolatey.org/packages/Markdown-Generator/1.0.1
+
+**Update**
+
+```
+choco upgrade markdown-generator
+```
+
+**Uninstalling**
+
+```
+choco uninstall markdown-generator
+```
 
 **Comments:**
 
@@ -39,13 +68,13 @@ MarkdownGenerator.exe help
 ```
 
 ```
-MarkdownGenerator.exe --index-file "index.xml" --base-dir "C:\my-doc" --translator-key [api-key] --verbose error
+MarkdownGenerator.exe --base-dir "C:\my-doc-folder" --index-file "index.xml" --translator-key [api-key] --verbose error
 ```
 
 _The names of the arguments can be omitted:_
 
 ```
-MarkdownGenerator.exe "index.xml" "C:\my-doc" [api-key] --verbose error
+MarkdownGenerator.exe "index.xml" "C:\my-doc-folder" [api-key] --verbose error
 ```
 
 # What are the problems that it solves?

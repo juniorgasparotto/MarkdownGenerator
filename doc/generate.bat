@@ -1,1 +1,1 @@
-..\src\bin\Debug\MarkdownGenerator.exe doc/index.xml ../ %1
+..\src\MarkdownGenerator\bin\Debug\MarkdownGenerator.exe doc/index.xml ../ %1

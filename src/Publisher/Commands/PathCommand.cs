@@ -105,6 +105,27 @@ namespace Publisher
         }
 
         [Argument]
+        public string GitPath
+        {
+            get
+            {
+                var appInfo = AppInfo.GetAppInfo();
+                if (string.IsNullOrWhiteSpace(appInfo.GitPath))
+                {
+                    appInfo.GitPath = App.Console.Read("Git Path: ");
+                    AppInfo.SaveAppInfo(appInfo);
+                }
+                return appInfo.GitPath;
+            }
+            set
+            {
+                var appInfo = AppInfo.GetAppInfo();
+                appInfo.GitPath = value;
+                AppInfo.SaveAppInfo(appInfo);
+            }
+        }
+
+        [Argument]
         public string ChocolateyPath
         {
             get
@@ -150,7 +171,7 @@ namespace Publisher
         {
             get
             {
-                return Path.GetDirectoryName(TargetProjectPath);
+                return Path.GetDirectoryName(Utils.GetFullPath(this, TargetProjectPath));
             }
         }
 
