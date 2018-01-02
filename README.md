@@ -29,7 +29,7 @@ _No need for installation_
 choco install markdown-generator
 ```
 
-URL: https://chocolatey.org/packages/Markdown-Generator/1.0.1
+URL: https://chocolatey.org/packages/Markdown-Generator
 
 **Update**
 
