@@ -18,7 +18,7 @@ namespace Publisher.CommandsSpecific.Chocolatey.Nuspec.tools_t4
     /// Class to produce the template output
     /// </summary>
     
-    #line 1 "D:\Junior\Projetos\GITHUB.COM\juniorgasparotto\Publisher\src\Publisher\CommandsSpecific\Chocolatey\Nuspec\tools-t4\chocolateyinstall.tt"
+    #line 1 "D:\Junior\Projetos\GITHUB.COM\juniorgasparotto\MarkdownGenerator\src\Publisher\CommandsSpecific\Chocolatey\Nuspec\tools-t4\chocolateyinstall.tt"
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.TextTemplating", "15.0.0.0")]
     public partial class chocolateyinstall : chocolateyinstallBase
     {
@@ -30,33 +30,48 @@ namespace Publisher.CommandsSpecific.Chocolatey.Nuspec.tools_t4
         {
             this.Write("\r\n$packageName = \'");
             
-            #line 9 "D:\Junior\Projetos\GITHUB.COM\juniorgasparotto\Publisher\src\Publisher\CommandsSpecific\Chocolatey\Nuspec\tools-t4\chocolateyinstall.tt"
+            #line 9 "D:\Junior\Projetos\GITHUB.COM\juniorgasparotto\MarkdownGenerator\src\Publisher\CommandsSpecific\Chocolatey\Nuspec\tools-t4\chocolateyinstall.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(vars["packageName"]));
             
             #line default
             #line hidden
             this.Write("\'\r\n$exeName = \'");
             
-            #line 10 "D:\Junior\Projetos\GITHUB.COM\juniorgasparotto\Publisher\src\Publisher\CommandsSpecific\Chocolatey\Nuspec\tools-t4\chocolateyinstall.tt"
+            #line 10 "D:\Junior\Projetos\GITHUB.COM\juniorgasparotto\MarkdownGenerator\src\Publisher\CommandsSpecific\Chocolatey\Nuspec\tools-t4\chocolateyinstall.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(vars["exeName"]));
             
             #line default
             #line hidden
             this.Write("\'\r\n$url = \'");
             
-            #line 11 "D:\Junior\Projetos\GITHUB.COM\juniorgasparotto\Publisher\src\Publisher\CommandsSpecific\Chocolatey\Nuspec\tools-t4\chocolateyinstall.tt"
+            #line 11 "D:\Junior\Projetos\GITHUB.COM\juniorgasparotto\MarkdownGenerator\src\Publisher\CommandsSpecific\Chocolatey\Nuspec\tools-t4\chocolateyinstall.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(vars["url"]));
             
             #line default
             #line hidden
+            this.Write("\'\r\n$binRoot = Get-ToolsLocation\r\n$installPath = Join-Path $binRoot $packageName\r\n" +
+                    "$checksum = \'");
+            
+            #line 14 "D:\Junior\Projetos\GITHUB.COM\juniorgasparotto\MarkdownGenerator\src\Publisher\CommandsSpecific\Chocolatey\Nuspec\tools-t4\chocolateyinstall.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(vars["checksum"]));
+            
+            #line default
+            #line hidden
+            this.Write("\'\r\n$checksumType = \'");
+            
+            #line 15 "D:\Junior\Projetos\GITHUB.COM\juniorgasparotto\MarkdownGenerator\src\Publisher\CommandsSpecific\Chocolatey\Nuspec\tools-t4\chocolateyinstall.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(vars["checksumType"]));
+            
+            #line default
+            #line hidden
             this.Write(@"'
-$binRoot = Get-ToolsLocation
-$installPath = Join-Path $binRoot $packageName
 
 # Download and unzip file
 Install-ChocolateyZipPackage -PackageName $packageName `
                              -Url $url `
-                             -UnzipLocation $installPath
+                             -UnzipLocation $installPath `
+							 -Checksum $checksum `
+                             -ChecksumType $checksumType
 
 # Create environment path in windows
 Install-ChocolateyPath $installPath 'user'
@@ -77,7 +92,7 @@ Install-ChocolateyPath $installPath 'user'
             return this.GenerationEnvironment.ToString();
         }
         
-        #line 1 "D:\Junior\Projetos\GITHUB.COM\juniorgasparotto\Publisher\src\Publisher\CommandsSpecific\Chocolatey\Nuspec\tools-t4\chocolateyinstall.tt"
+        #line 1 "D:\Junior\Projetos\GITHUB.COM\juniorgasparotto\MarkdownGenerator\src\Publisher\CommandsSpecific\Chocolatey\Nuspec\tools-t4\chocolateyinstall.tt"
 
 private global::System.Collections.Generic.Dictionary<string, string> _varsField;
 

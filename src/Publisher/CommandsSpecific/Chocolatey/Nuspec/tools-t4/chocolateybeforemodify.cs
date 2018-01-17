@@ -18,7 +18,7 @@ namespace Publisher.CommandsSpecific.Chocolatey.Nuspec.tools_t4
     /// Class to produce the template output
     /// </summary>
     
-    #line 1 "D:\Junior\Projetos\GITHUB.COM\juniorgasparotto\Publisher\src\Publisher\CommandsSpecific\Chocolatey\Nuspec\tools-t4\chocolateybeforemodify.tt"
+    #line 1 "D:\Junior\Projetos\GITHUB.COM\juniorgasparotto\MarkdownGenerator\src\Publisher\CommandsSpecific\Chocolatey\Nuspec\tools-t4\chocolateybeforemodify.tt"
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.TextTemplating", "15.0.0.0")]
     public partial class chocolateybeforemodify : chocolateybeforemodifyBase
     {
@@ -42,7 +42,7 @@ namespace Publisher.CommandsSpecific.Chocolatey.Nuspec.tools_t4
             return this.GenerationEnvironment.ToString();
         }
         
-        #line 1 "D:\Junior\Projetos\GITHUB.COM\juniorgasparotto\Publisher\src\Publisher\CommandsSpecific\Chocolatey\Nuspec\tools-t4\chocolateybeforemodify.tt"
+        #line 1 "D:\Junior\Projetos\GITHUB.COM\juniorgasparotto\MarkdownGenerator\src\Publisher\CommandsSpecific\Chocolatey\Nuspec\tools-t4\chocolateybeforemodify.tt"
 
 private global::System.Collections.Generic.Dictionary<string, string> _varsField;
 

@@ -18,7 +18,7 @@ namespace Publisher.CommandsSpecific.Chocolatey.Nuspec.tools_t4
     /// Class to produce the template output
     /// </summary>
     
-    #line 1 "D:\Junior\Projetos\GITHUB.COM\juniorgasparotto\Publisher\src\Publisher\CommandsSpecific\Chocolatey\Nuspec\tools-t4\chocolateyuninstall.tt"
+    #line 1 "D:\Junior\Projetos\GITHUB.COM\juniorgasparotto\MarkdownGenerator\src\Publisher\CommandsSpecific\Chocolatey\Nuspec\tools-t4\chocolateyuninstall.tt"
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.TextTemplating", "15.0.0.0")]
     public partial class chocolateyuninstall : chocolateyuninstallBase
     {
@@ -30,7 +30,7 @@ namespace Publisher.CommandsSpecific.Chocolatey.Nuspec.tools_t4
         {
             this.Write("\r\n$packageName = \'");
             
-            #line 9 "D:\Junior\Projetos\GITHUB.COM\juniorgasparotto\Publisher\src\Publisher\CommandsSpecific\Chocolatey\Nuspec\tools-t4\chocolateyuninstall.tt"
+            #line 9 "D:\Junior\Projetos\GITHUB.COM\juniorgasparotto\MarkdownGenerator\src\Publisher\CommandsSpecific\Chocolatey\Nuspec\tools-t4\chocolateyuninstall.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(vars["packageName"]));
             
             #line default
@@ -71,7 +71,7 @@ if (Test-Path $installPath) {
             return this.GenerationEnvironment.ToString();
         }
         
-        #line 1 "D:\Junior\Projetos\GITHUB.COM\juniorgasparotto\Publisher\src\Publisher\CommandsSpecific\Chocolatey\Nuspec\tools-t4\chocolateyuninstall.tt"
+        #line 1 "D:\Junior\Projetos\GITHUB.COM\juniorgasparotto\MarkdownGenerator\src\Publisher\CommandsSpecific\Chocolatey\Nuspec\tools-t4\chocolateyuninstall.tt"
 
 private global::System.Collections.Generic.Dictionary<string, string> _varsField;
 

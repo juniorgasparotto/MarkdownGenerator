@@ -52,7 +52,7 @@
   "ChocolateyPath": "C:\\ProgramData\\chocolatey\\choco.exe",
   "ChocolateyExeName": "MarkdownGenerator.exe",
   "ChocolateyPackageName": "markdown-generator",
-  "ChocolateyTitle": "Markdown-Generator",
+  "ChocolateyTitle": "Markdown Generator",
   "ChocolateyUrlDownload": "https://github.com/juniorgasparotto/MarkdownGenerator/releases/download/{version}/MarkdownGenerator.zip",
   "ChocolateyProjectUrl": "https://github.com/juniorgasparotto/MarkdownGenerator",
   "ChocolateyLicenceUrl": "https://github.com/juniorgasparotto/MarkdownGenerator/blob/master/LICENSE",
@@ -60,5 +60,9 @@
   "ChocolateyTags": "markdown-generator markdown split-doc markdown-translator",
   "ChocolateyDescription": "This tool is an executable that tries to solve common problems for people who write with markdown documents.",
   "ChocolateyAuthor": "Glauber D. Gasparotto Junior",
-  "GitPath": "C:\\Program Files\\Git\\bin\\git.exe"
+  "ChocolateyPackageSourceUrl": "https://github.com/juniorgasparotto/MarkdownGenerator/releases",
+  "ChocolateyDocsUrl": "https://github.com/juniorgasparotto/MarkdownGenerator",
+  "ChocolateyBugTrackerUrl": "https://github.com/juniorgasparotto/MarkdownGenerator/issues",
+  "GitPath": "C:\\Program Files\\Git\\bin\\git.exe",
+  "ChecksumToolPath": "~/src/Publisher/Tools/checksum.exe"
 }

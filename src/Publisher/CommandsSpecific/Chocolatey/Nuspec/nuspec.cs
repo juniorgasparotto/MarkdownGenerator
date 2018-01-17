@@ -71,28 +71,56 @@ namespace Publisher.CommandsSpecific.Chocolatey.Nuspec
             
             #line default
             #line hidden
-            this.Write("</licenseUrl>\r\n    <tags>");
+            this.Write("</licenseUrl>\r\n\t<packageSourceUrl>");
             
             #line 18 "D:\Junior\Projetos\GITHUB.COM\juniorgasparotto\MarkdownGenerator\src\Publisher\CommandsSpecific\Chocolatey\Nuspec\nuspec.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(vars["packageSourceUrl"]));
+            
+            #line default
+            #line hidden
+            this.Write("</packageSourceUrl>\r\n\t<docsUrl>");
+            
+            #line 19 "D:\Junior\Projetos\GITHUB.COM\juniorgasparotto\MarkdownGenerator\src\Publisher\CommandsSpecific\Chocolatey\Nuspec\nuspec.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(vars["docsUrl"]));
+            
+            #line default
+            #line hidden
+            this.Write("</docsUrl>\r\n\t<bugTrackerUrl>");
+            
+            #line 20 "D:\Junior\Projetos\GITHUB.COM\juniorgasparotto\MarkdownGenerator\src\Publisher\CommandsSpecific\Chocolatey\Nuspec\nuspec.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(vars["bugTrackerUrl"]));
+            
+            #line default
+            #line hidden
+            this.Write("</bugTrackerUrl>\r\n\t<iconUrl>");
+            
+            #line 21 "D:\Junior\Projetos\GITHUB.COM\juniorgasparotto\MarkdownGenerator\src\Publisher\CommandsSpecific\Chocolatey\Nuspec\nuspec.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(vars["iconUrl"]));
+            
+            #line default
+            #line hidden
+            this.Write("</iconUrl>\r\n    <tags>");
+            
+            #line 22 "D:\Junior\Projetos\GITHUB.COM\juniorgasparotto\MarkdownGenerator\src\Publisher\CommandsSpecific\Chocolatey\Nuspec\nuspec.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(vars["tags"]));
             
             #line default
             #line hidden
             this.Write("</tags>\r\n    <description>");
             
-            #line 19 "D:\Junior\Projetos\GITHUB.COM\juniorgasparotto\MarkdownGenerator\src\Publisher\CommandsSpecific\Chocolatey\Nuspec\nuspec.tt"
+            #line 23 "D:\Junior\Projetos\GITHUB.COM\juniorgasparotto\MarkdownGenerator\src\Publisher\CommandsSpecific\Chocolatey\Nuspec\nuspec.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(vars["description"]));
             
             #line default
             #line hidden
-            this.Write("</description>\r\n\t<iconUrl>");
+            this.Write("</description>\r\n\t<summary>");
             
-            #line 20 "D:\Junior\Projetos\GITHUB.COM\juniorgasparotto\MarkdownGenerator\src\Publisher\CommandsSpecific\Chocolatey\Nuspec\nuspec.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(vars["iconUrl"]));
+            #line 24 "D:\Junior\Projetos\GITHUB.COM\juniorgasparotto\MarkdownGenerator\src\Publisher\CommandsSpecific\Chocolatey\Nuspec\nuspec.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(vars["summary"]));
             
             #line default
             #line hidden
-            this.Write("</iconUrl>\r\n  </metadata>\r\n  <files>\r\n    <file src=\"tools\\**\" target=\"tools\" />\r" +
+            this.Write("</summary>\r\n  </metadata>\r\n  <files>\r\n    <file src=\"tools\\**\" target=\"tools\" />\r" +
                     "\n  </files>\r\n</package>");
             return this.GenerationEnvironment.ToString();
         }

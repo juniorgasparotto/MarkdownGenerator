@@ -11,11 +11,15 @@ $exeName = '<#= vars["exeName"] #>'
 $url = '<#= vars["url"] #>'
 $binRoot = Get-ToolsLocation
 $installPath = Join-Path $binRoot $packageName
+$checksum = '<#= vars["checksum"] #>'
+$checksumType = '<#= vars["checksumType"] #>'
 
 # Download and unzip file
 Install-ChocolateyZipPackage -PackageName $packageName `
                              -Url $url `
-                             -UnzipLocation $installPath
+                             -UnzipLocation $installPath `
+							 -Checksum $checksum `
+                             -ChecksumType $checksumType
 
 # Create environment path in windows
 Install-ChocolateyPath $installPath 'user'
