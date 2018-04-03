@@ -46,11 +46,11 @@ namespace MarkdownGenerator.Helpers
         }
 
 
-        public static string GetAnchorLink(string urlBase, string outputPath, string anchorName)
+        public static string GetAnchorLink(string urlBase, string anchorName)
         {
             var path = "";
             if (!string.IsNullOrEmpty(urlBase))
-                path = AppendUri(new Uri(urlBase), outputPath).ToString();
+                path = AppendUri(new Uri(urlBase)).ToString();
             return path + "#" + anchorName;
         }
     }

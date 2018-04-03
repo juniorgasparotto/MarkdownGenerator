@@ -14,12 +14,10 @@ namespace MarkdownGenerator.Xml
     {
         public List<Version> Versions { get; } = new List<Version>();
         public Documentation Documentation { get; private set; }
-        public string UrlBase { get; internal set; }
 
         public Page(Documentation doc, XElement xpage)
         {
             this.Documentation = doc;
-            this.UrlBase = xpage.Attribute("url-base")?.Value;
             this.ParseVersions(xpage);
         }
 
@@ -39,6 +37,7 @@ namespace MarkdownGenerator.Xml
                     var lang = new Language()
                     {
                         Name = xlang.Attribute("name").Value,
+                        UrlBase = xlang.Attribute("url-base")?.Value,
                         Output = xlang.Attribute("output").Value,
                         IsDefault = xlang.Attribute("default")?.Value == "true"
                     };

@@ -10,7 +10,7 @@ namespace MarkdownGenerator
     {
         static int Main(string[] args)
         {
-            // sample: --indexFile Sample/Index.xml
+            // cmd> --index-file Sample/Index.xml --translator-key [get in azure]
             return App.RunApplication(() =>
             {
                 var loader = new AppDomainCommandLoader();
