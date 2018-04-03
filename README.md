@@ -11,7 +11,7 @@ This tool is an executable (with some dependencies) that tries to solve common p
 
 ## Installation (Manual)
 
-1. Download the .zip file [by clicking here](https://github.com/juniorgasparotto/MarkdownGenerator/releases/download/1.0.1/MarkdownGenerator.zip)
+1. Download the .zip file [by clicking here](https://github.com/juniorgasparotto/MarkdownGenerator/releases/download/1.0.2/MarkdownGenerator.zip)
 2. Extract the .zip anywhere
 3. Run the file via the command line`MarkdownGenerator.exe`
 
@@ -19,7 +19,7 @@ This tool is an executable (with some dependencies) that tries to solve common p
 MarkdownGenerator.exe --base-dir "C:\my-doc-folder" --index-file "index.xml" --translator-key [api-key] --verbose error
 ```
 
-**DOWNLOAD LINK**: https://github.com/juniorgasparotto/MarkdownGenerator/releases/download/1.0.1/MarkdownGenerator.zip
+**DOWNLOAD LINK**: https://github.com/juniorgasparotto/MarkdownGenerator/releases/download/1.0.2/MarkdownGenerator.zip
 
 _No need for installation_
 

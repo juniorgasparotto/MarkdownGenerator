@@ -12,7 +12,7 @@ Essa ferramenta é um executável (com algumas dependências) que tenta resolver
 
 ## Instalação (Manual)
 
-1. Fazer o download do .zip <a href="https://github.com/juniorgasparotto/MarkdownGenerator/releases/download/1.0.1/MarkdownGenerator.zip">clicando aqui</a>
+1. Fazer o download do .zip <a href="https://github.com/juniorgasparotto/MarkdownGenerator/releases/download/1.0.2/MarkdownGenerator.zip">clicando aqui</a>
 2. Extrair o .zip em qualquer local
 3. Executar o arquivo via linha de comando `MarkdownGenerator.exe`
 
@@ -20,7 +20,7 @@ Essa ferramenta é um executável (com algumas dependências) que tenta resolver
 MarkdownGenerator.exe --base-dir "C:\my-doc-folder" --index-file "index.xml" --translator-key [api-key] --verbose error
 ```
 
-**DOWNLOAD LINK**: https://github.com/juniorgasparotto/MarkdownGenerator/releases/download/1.0.1/MarkdownGenerator.zip
+**DOWNLOAD LINK**: https://github.com/juniorgasparotto/MarkdownGenerator/releases/download/1.0.2/MarkdownGenerator.zip
 
 _Não precisa de instalação_
 
