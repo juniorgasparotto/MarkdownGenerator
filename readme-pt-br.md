@@ -101,27 +101,27 @@ Esse arquivo contém todas as configurações do seu documento. Ele é composto,
 
 ```xml
 <documentation>
-  <page url-base="https://github.com/user/project">
+  <page>
     <languages>
-      <language name="pt-br" output="page1-pt-br.md" default="true" />
-      <language name="en-us" output="page1.md" />
-      <!--Others languages-->
+      <language name="pt-br" output="readme-pt-br.md" default="true" url-base="https://github.com/user/project/blob/master/readme-pt-br.md" />
+      <language name="en-us" output="readme.md" url-base="https://github.com/user/project" />
     </languages>
     <content>
-        <include href="files/page1-part1.md" />
-        <include href="files/page1-part2.md" />
+        <include href="doc/pages/readme/description.md" />
+        <include href="doc/pages/readme/install.md" />
+        <include href="doc/pages/readme/licence.md" />
     </content>
   </page>
 
-  <page url-base="https://github.com/user/project/blob/master">
+  <page>
     <languages>
-      <language name="pt-br" output="page2-pt-br.md" default="true" />
-      <language name="en-us" output="page2-en.md" />
-      <!--Others languages-->
+      <language name="pt-br" output="doc/pt-br.md" default="true" url-base="https://github.com/user/project/blob/master/doc/pt-br.md" />
+      <language name="en-us" output="doc/en.md" url-base="https://github.com/user/project/blob/master/doc/en.md" />
     </languages>
     <content>
-        <include href="files/page2-part1.md" />
-        <include href="files/page2-part2.md" />
+        <include href="doc/pages/suject1.md" />
+        <include href="doc/pages/suject2.md" />
+        <include href="doc/pages/suject3.md" />
     </content>
   </page>
 </documentation>
@@ -130,8 +130,6 @@ Esse arquivo contém todas as configurações do seu documento. Ele é composto,
 **Tag `page`**
 
 É obrigatório que exista no mínimo uma ocorrência dessa tag. Ela é composta pelas tags `languages` e `content`. Ela representa um documento que pode ser traduzido para outros idiomas. Cada versão de idioma equivale a um arquivo físico.
-
-O atributo `url-base` não é obrigatório se existir apenas uma tag `page`. Ele é útil para montar as âncoras com o caminho completo, assim você pode usar âncoras que estão em outra `page`.
 
 **Tag `languages`**
 
@@ -142,6 +140,7 @@ Cada tag `language` contem os seguintes atributos:
 * `name`: Define a sigla do idioma (https://dev.microsofttranslator.com/languages?api-version=1.0)
 * `output`: Define o caminho onde o arquivo final será salvo. A pasta relativa será sempre a pasta que o executavél esta sendo executado, mas você pode mudar esse caminho relativo usando o argumento `--base-dir`.
 * `default`: Define qual tag `language` corresponde ao idioma padrão.
+* `url-base`: Não é obrigatório, mas é interessante existir para ajudar na criação das âncoras com o caminho absoluto, evitando assim problemas ao usar o método `<anchor-get name="anchor-name" />`. Garantido também a criação de âncoras que estão em outras páginas: `<anchor-get name="anchor-name-other-page" />`.
 
 **Tag `content`**
 
